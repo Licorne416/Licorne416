@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Licorne 416 • Belle Plagne | Livret d'Accueil & Guide Voyageur</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Cinzel:wght@600;700;800&display=swap');
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0f172a;
+            color: #1e293b;
+        }
+
+        .font-serif-title {
+            font-family: 'Cinzel', serif;
+        }
+
+        /* Glassmorphism cards */
+        .glass-card {
+            background: rgba(252, 250, 247, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(217, 119, 6, 0.2);
+        }
+
+        .glass-card-dark {
+            background: rgba(27, 43, 72, 0.94);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(245, 158, 11, 0.25);
+        }
+
+        /* Background fixed overlay */
+        .bg-poster {
+            background-image: url('Belle_Plagne_Print_40x50cm_300dp.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.6);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c86d2a;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-poster min-h-screen relative antialiased flex flex-col justify-between">
+
+    <!-- Overlays for mood lighting and legibility -->
+    <div class="fixed inset-0 bg-slate-950/60 backdrop-blur-[2px] z-0 pointer-events-none"></div>
+
+    <div class="relative z-10 flex-grow pb-24 lg:pb-12">
+        
+        <!-- TOP STICKY NAVBAR -->
+        <header class="sticky top-0 z-50 bg-[#1b2b48]/95 backdrop-blur-md border-b border-amber-500/30 text-white shadow-2xl">
+            <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+                
+                <!-- Logo & Brand -->
+                <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('accueil')">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-[#c86d2a] p-0.5 shadow-md shrink-0">
+                        <div class="w-full h-full bg-[#1b2b48] rounded-[10px] flex items-center justify-center font-bold text-amber-300">
+                            🦄
+                        </div>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-base sm:text-lg text-white leading-tight tracking-wide font-serif-title">LICORNE 416</h1>
+                        <p class="text-[10px] text-amber-300/80 font-semibold uppercase tracking-widest">Belle Plagne • 2050m</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Nav -->
+                <nav class="hidden md:flex items-center gap-1 bg-slate-900/60 p-1.5 rounded-2xl border border-amber-500/20 text-xs font-bold">
+                    <button onclick="switchTab('accueil')" id="nav-desktop-accueil" class="tab-btn px-4 py-2 rounded-xl transition flex items-center gap-2 bg-amber-500 text-[#1b2b48] shadow-md">
+                        <i class="fas fa-home"></i> <span data-i18n="nav_home">Accueil & Arrivée</span>
+                    </button>
+                    <button onclick="switchTab('logement')" id="nav-desktop-logement" class="tab-btn px-4 py-2 rounded-xl transition flex items-center gap-2 text-slate-300 hover:text-white hover:bg-white/10">
+                        <i class="fas fa-key"></i> <span data-i18n="nav_lodging">Logement & Inventaire</span>
+                    </button>
+                    <button onclick="switchTab('decouvrir')" id="nav-desktop-decouvrir" class="tab-btn px-4 py-2 rounded-xl transition flex items-center gap-2 text-slate-300 hover:text-white hover:bg-white/10">
+                        <i class="fas fa-mountain"></i> <span data-i18n="nav_explore">Découvrir La Plagne</span>
+                    </button>
+                    <button onclick="switchTab('depart')" id="nav-desktop-depart" class="tab-btn px-4 py-2 rounded-xl transition flex items-center gap-2 text-slate-300 hover:text-white hover:bg-white/10">
+                        <i class="fas fa-check-circle"></i> <span data-i18n="nav_depart">Départ & Avis</span>
+                    </button>
+                </nav>
+
+                <!-- Language Switcher Dropdown / Buttons -->
+                <div class="flex items-center gap-1 bg-slate-900/80 p-1 rounded-xl border border-amber-500/30 text-xs">
+                    <button onclick="setLanguage('fr')" id="lang-fr" class="lang-btn px-2.5 py-1 rounded-lg font-bold transition bg-amber-500 text-[#1b2b48]">🇫🇷 FR</button>
+                    <button onclick="setLanguage('en')" id="lang-en" class="lang-btn px-2.5 py-1 rounded-lg font-bold transition text-slate-300 hover:bg-white/10">🇬🇧 EN</button>
+                    <button onclick="setLanguage('nl')" id="lang-nl" class="lang-btn px-2.5 py-1 rounded-lg font-bold transition text-slate-300 hover:bg-white/10">🇳🇱 NL</button>
+                    <button onclick="setLanguage('de')" id="lang-de" class="lang-btn px-2.5 py-1 rounded-lg font-bold transition text-slate-300 hover:bg-white/10">🇩🇪 DE</button>
+                </div>
+
+            </div>
+        </header>
+
+        <!-- MAIN CONTAINER -->
+        <main class="max-w-4xl mx-auto px-3 sm:px-6 pt-6 space-y-6">
+
+            <!-- TAB 1 : ACCUEIL & ARRIVÉE -->
+            <div id="tab-accueil" class="tab-content space-y-6">
+                
+                <!-- Hero Header Banner with Visual Artwork -->
+                <div class="glass-card-dark rounded-3xl p-4 sm:p-6 text-white shadow-2xl relative overflow-hidden text-center space-y-4">
+                    <!-- Banner Art Header -->
+                    <div class="rounded-2xl overflow-hidden border border-amber-500/30 shadow-lg relative group">
+                        <img src="Screenshot 2026-07-30 22.41.58.jpg" alt="Licorne 416 Banner" class="w-full h-48 sm:h-64 object-cover object-center group-hover:scale-105 transition duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#1b2b48] via-transparent to-transparent opacity-80"></div>
+                        <div class="absolute bottom-3 left-4 right-4 text-center">
+                            <span class="px-3 py-1 bg-amber-500/90 text-[#1b2b48] font-black text-xs rounded-full uppercase tracking-widest shadow-md">
+                                Belle Plagne • 4ᵉ Étage • Résidence Licorne
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="pt-2">
+                        <h2 class="text-2xl sm:text-4xl font-black uppercase text-amber-400 font-serif-title tracking-tight" data-i18n="welcome_title">
+                            Bienvenue à la Licorne 416
+                        </h2>
+                        <p class="text-slate-300 text-xs sm:text-sm mt-1" data-i18n="welcome_subtitle">
+                            Votre cocon d'altitude chaleureux au cœur du domaine Paradiski
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Le Mot de Jérôme -->
+                <div class="glass-card rounded-3xl p-6 sm:p-8 shadow-xl space-y-4">
+                    <div class="flex items-center gap-3 border-b border-amber-900/10 pb-4">
+                        <span class="text-3xl p-2.5 bg-amber-100 rounded-2xl border border-amber-200 shadow-sm">👋</span>
+                        <div>
+                            <span class="text-[10px] font-black text-[#c86d2a] uppercase tracking-widest block" data-i18n="host_tag">Votre Hôte</span>
+                            <h3 class="text-xl sm:text-2xl font-black text-[#1b2b48]" data-i18n="host_title">Le mot de Jérôme</h3>
+                        </div>
+                    </div>
+                    <p class="text-slate-700 leading-relaxed text-sm sm:text-base text-justify" data-i18n="host_text">
+                        Bonjour et bienvenue ! Ayant grandi dans la vallée à Aime, j'ai passé toute mon enfance à dévaler les pistes de ce domaine d'exception et à parcourir ses magnifiques chemins de randonnée. Après mes études à Lyon et une carrière à Paris, cet appartement représente pour moi un véritable retour aux sources : un havre de paix où retrouver ces moments de bien-être uniques que seule la montagne sait offrir, été comme hiver.
+                        <br><br>
+                        J'ai conçu ce guide interactif pour que votre séjour soit aussi simple, autonome et agréable que possible. Je vous souhaite d'y vivre d'aussi beaux souvenirs que les miens !
+                    </p>
+                </div>
+
+                <!-- Contacts Directs -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <!-- Jérôme -->
+                    <div class="glass-card-dark p-6 rounded-3xl text-white shadow-xl flex flex-col justify-between space-y-4">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-[10px] font-black text-amber-400 uppercase tracking-widest bg-amber-500/10 px-3 py-1 rounded-full border border-amber-400/20" data-i18n="contact_host_tag">Votre Hôte</span>
+                                <span class="text-2xl">🏠</span>
+                            </div>
+                            <p class="font-black text-2xl text-white">Jérôme POUTEAU</p>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <a href="tel:+33678539732" class="bg-white/10 hover:bg-white/20 text-white text-center py-3 rounded-2xl text-xs font-bold border border-white/20 transition flex items-center justify-center gap-1.5 shadow-sm">
+                                📞 <span data-i18n="btn_call">Appeler</span>
+                            </a>
+                            <a href="https://wa.me/33678539732" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white text-center py-3 rounded-2xl text-xs font-bold transition flex items-center justify-center gap-1.5 shadow-md">
+                                💬 WhatsApp
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Marie-France -->
+                    <div class="glass-card p-6 rounded-3xl text-slate-800 shadow-xl flex flex-col justify-between space-y-4">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-[10px] font-black text-[#c86d2a] uppercase tracking-widest bg-[#c86d2a]/10 px-3 py-1 rounded-full border border-[#c86d2a]/20" data-i18n="contact_concierge_tag">Conciergerie (Linge & Draps)</span>
+                                <span class="text-2xl">🔑</span>
+                            </div>
+                            <p class="font-black text-2xl text-[#1b2b48]">Marie-France</p>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <a href="tel:+33695173396" class="bg-[#1b2b48] hover:bg-[#23385d] text-white text-center py-3 rounded-2xl text-xs font-bold transition flex items-center justify-center gap-1.5 shadow-md">
+                                📞 <span data-i18n="btn_call">Appeler</span>
+                            </a>
+                            <a href="https://wa.me/33695173396" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white text-center py-3 rounded-2xl text-xs font-bold transition flex items-center justify-center gap-1.5 shadow-md">
+                                💬 WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GPS Direct & Parking -->
+                <div class="glass-card rounded-3xl p-6 sm:p-8 shadow-xl space-y-5">
+                    <div class="flex items-center justify-between flex-wrap gap-4 border-b border-amber-900/10 pb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-[#c86d2a]/10 p-3 rounded-2xl text-2xl text-[#c86d2a] border border-[#c86d2a]/20">📍</div>
+                            <div>
+                                <span class="text-[10px] font-black text-[#c86d2a] uppercase tracking-widest block" data-i18n="gps_tag">Cap sur Belle Plagne</span>
+                                <h3 class="text-xl sm:text-2xl font-black text-[#1b2b48]" data-i18n="gps_title">Itinéraire Direct vers le Parking Haut</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <a href="https://maps.google.com/?cid=15568267520634610363" target="_blank" class="bg-[#1b2b48] hover:bg-slate-900 text-amber-300 py-3.5 px-4 rounded-2xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-md border border-amber-500/30">
+                            🗺️ <span data-i18n="gps_google">Ouvrir dans Google Maps</span> →
+                        </a>
+                        <a href="https://waze.com/ul?q=Parking%20Haut%20Belle%20Plagne&navigate=yes" target="_blank" class="bg-[#c86d2a] hover:bg-amber-700 text-white py-3.5 px-4 rounded-2xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-md">
+                            🚗 <span data-i18n="gps_waze">Lancer avec Waze</span> →
+                        </a>
+                    </div>
+
+                    <div class="bg-white/80 p-4 rounded-2xl border border-amber-900/10 text-xs sm:text-sm text-slate-700 space-y-2">
+                        <p><strong class="text-[#c86d2a]" data-i18n="parking_summer_title">☀️ Saison d'Été :</strong> <span data-i18n="parking_summer_desc">Stationnement 100% Gratuit sur l'ensemble du parking amont !</span></p>
+                        <p><strong class="text-[#1b2b48]" data-i18n="parking_winter_title">❄️ Saison d'Hiver :</strong> <span data-i18n="parking_winter_desc">Payant, mais un accès dépose-minute gratuit est autorisé pour vous garer temporairement au plus près du bâtiment et décharger vos bagages facilement.</span></p>
+                    </div>
+                </div>
+
+                <!-- Codes d'accès & Casier -->
+                <div class="glass-card-dark rounded-3xl p-6 sm:p-8 text-white shadow-2xl border border-amber-500/20 space-y-6">
+                    <h3 class="text-xl sm:text-2xl font-black flex items-center gap-3 text-amber-400 uppercase tracking-wide border-b border-amber-500/20 pb-4" data-i18n="access_title">
+                        🗝️ Accès, Boîte à Clés & Casier
+                    </h3>
+                    
+                    <div class="space-y-6">
+                        <!-- Boîte à clés -->
+                        <div class="flex items-start gap-4">
+                            <div class="bg-amber-500/20 border border-amber-500/40 p-3 rounded-2xl text-2xl shrink-0 text-amber-400">🔑</div>
+                            <div class="flex-1">
+                                <h4 class="font-bold text-lg text-white" data-i18n="access_keybox_title">Boîte à clés (Porte 416)</h4>
+                                <p class="text-slate-300 text-xs sm:text-sm mb-3" data-i18n="access_keybox_desc">Fixée directement sur la porte d'entrée de l'appartement au 4ᵉ étage.</p>
+                                <div class="inline-flex items-center gap-3 bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 px-5 py-2.5 rounded-2xl font-mono text-3xl font-black tracking-widest shadow-lg">
+                                    <span>2410</span>
+                                </div>
+                                <p class="text-xs text-amber-200/80 mt-2" data-i18n="access_keybox_tip">💡 N'oubliez pas de brouiller le code après ouverture.</p>
+                            </div>
+                        </div>
+
+                        <!-- Badge -->
+                        <div class="flex items-start gap-4 border-t border-slate-800/80 pt-6">
+                            <div class="bg-amber-500/20 border border-amber-500/40 p-3 rounded-2xl text-2xl shrink-0 text-amber-400">🪪</div>
+                            <div>
+                                <h4 class="font-bold text-lg text-white" data-i18n="access_badge_title">Badge d'Accès (sur le trousseau)</h4>
+                                <p class="text-slate-300 text-xs sm:text-sm leading-relaxed" data-i18n="access_badge_desc">
+                                    L'accès à la boîte à clés depuis le parking est libre. Le badge accroché au trousseau sert à :
+                                </p>
+                                <ul class="list-disc list-inside text-xs sm:text-sm text-slate-300 mt-2 space-y-1">
+                                    <li data-i18n="badge_item_1">L'utilisation de l'<strong>ascenseur</strong></li>
+                                    <li data-i18n="badge_item_2">L'accès au <strong>local des casiers à skis</strong></li>
+                                    <li data-i18n="badge_item_3">L'ouverture de la <strong>porte RDC</strong> donnant directement sur la piste</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Casier Ski -->
+                        <div class="flex items-start gap-4 border-t border-slate-800/80 pt-6">
+                            <div class="bg-amber-500/20 border border-amber-500/40 p-3 rounded-2xl text-2xl shrink-0 text-amber-400">🎿</div>
+                            <div class="flex-1">
+                                <h4 class="font-bold text-lg text-white" data-i18n="access_ski_title">Casier à Skis n°31 (RDC)</h4>
+                                <p class="text-slate-300 text-xs sm:text-sm mb-2" data-i18n="access_ski_desc">Situé dans le local du RDC. Code du cadenas :</p>
+                                <div class="inline-flex items-center gap-3 bg-white/10 border border-white/20 text-white px-5 py-2 rounded-2xl font-mono text-2xl font-extrabold tracking-widest mb-3">
+                                    <span>6416</span>
+                                </div>
+                                <div class="bg-amber-500/10 border border-amber-500/30 p-4 rounded-2xl text-xs sm:text-sm text-amber-200/90 leading-relaxed" data-i18n="access_ski_dryer">
+                                    🔥 <strong>Sèche-chaussures électriques inclus !</strong> Profitez des chauffe-chaussures installés dans le casier pour des chaussures bien chaudes chaque matin.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Horaires Checkin/Checkout -->
+                        <div class="grid grid-cols-2 gap-4 border-t border-slate-800/80 pt-6 text-center">
+                            <div class="bg-slate-900/90 p-4 rounded-2xl border border-slate-800">
+                                <p class="text-amber-400/80 text-xs uppercase font-bold tracking-wider mb-1" data-i18n="checkin_label">Arrivée (Check-in)</p>
+                                <p class="font-black text-lg text-white" data-i18n="checkin_time">Dès 16h00</p>
+                            </div>
+                            <div class="bg-slate-900/90 p-4 rounded-2xl border border-slate-800">
+                                <p class="text-amber-400/80 text-xs uppercase font-bold tracking-wider mb-1" data-i18n="checkout_label">Départ (Check-out)</p>
+                                <p class="font-black text-lg text-white" data-i18n="checkout_time">Avant 10h00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- TAB 2 : LOGEMENT & INVENTAIRE -->
+            <div id="tab-logement" class="tab-content space-y-6 hidden">
+                
+                <!-- Technical Guide Header -->
+                <div class="glass-card-dark rounded-3xl p-6 sm:p-8 text-white shadow-xl space-y-3">
+                    <h2 class="text-2xl sm:text-3xl font-black uppercase flex items-center gap-3 text-amber-400 font-serif-title">
+                        <span>⚙️</span> <span data-i18n="tech_title">Guide Technique & Équipements</span>
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-300" data-i18n="tech_subtitle">
+                        Consignes pratiques pour le bon fonctionnement de votre cocon
+                    </p>
+                </div>
+
+                <!-- Technical cards -->
+                <div class="space-y-4">
+                    <!-- Eau -->
+                    <div class="glass-card rounded-3xl border border-amber-900/10 overflow-hidden shadow-lg">
+                        <div class="p-5 bg-amber-100/50 border-b border-amber-900/10 font-extrabold text-[#1b2b48] flex items-center gap-2.5 text-base sm:text-lg">
+                            <span class="text-xl">💧</span> <span data-i18n="tech_water_title">Arrivée d'Eau (4 Vannes)</span>
+                        </div>
+                        <div class="p-5 text-xs sm:text-sm text-slate-700 space-y-3 bg-white/80">
+                            <p class="bg-amber-50 text-amber-900 p-3.5 rounded-2xl text-xs font-semibold border border-amber-200" data-i18n="tech_water_alert">
+                                ℹ️ Les 4 vannes sont <strong>normalement OUVERTES</strong>. Merci de ne les manipuler qu'en cas de fuite d'eau ou de problème technique.
+                            </p>
+                            <p data-i18n="tech_water_kitchen"><strong>Cuisine (2 vannes) :</strong> Situées sous l'évier dans le meuble, accessibles en passant la main derrière la plaque en bois fin au fond.</p>
+                            <p data-i18n="tech_water_bathroom"><strong>Salle de Bains (2 vannes) :</strong> Situées sous le meuble de la SDB, accessibles par une ouverture en bas à gauche au fond du meuble.</p>
+                        </div>
+                    </div>
+
+                    <!-- Électricité -->
+                    <div class="glass-card rounded-3xl border border-amber-900/10 overflow-hidden shadow-lg">
+                        <div class="p-5 bg-amber-100/50 border-b border-amber-900/10 font-extrabold text-[#1b2b48] flex items-center gap-2.5 text-base sm:text-lg">
+                            <span class="text-xl">⚡</span> <span data-i18n="tech_elec_title">Électricité & Chauffage</span>
+                        </div>
+                        <div class="p-5 text-xs sm:text-sm text-slate-700 space-y-3 bg-white/80">
+                            <p data-i18n="tech_elec_desc"><strong>Compteur Électrique :</strong> Situé dans le couloir d'entrée. L'électricité est activée. En cas de disjonction, réenclenchez le <strong>bouton principal tout en bas</strong> du tableau.</p>
+                            <p data-i18n="tech_heating_desc"><strong>Chauffage :</strong> Température conseillée entre 19°C et 20°C. Pensez à baisser les radiateurs lorsque vous aérez l'appartement.</p>
+                        </div>
+                    </div>
+
+                    <!-- Cafetière & Convivialité -->
+                    <div class="glass-card rounded-3xl border border-amber-900/10 overflow-hidden shadow-lg">
+                        <div class="p-5 bg-amber-100/50 border-b border-amber-900/10 font-extrabold text-[#1b2b48] flex items-center gap-2.5 text-base sm:text-lg">
+                            <span class="text-xl">☕</span> <span data-i18n="tech_kitchen_title">Cafetière & Équipements Conviviaux</span>
+                        </div>
+                        <div class="p-5 text-xs sm:text-sm text-slate-700 space-y-2 bg-white/80">
+                            <p data-i18n="tech_coffee_desc"><strong>Cafetière :</strong> Cafetière électrique à filtre traditionnelle (prévoir filtres n°4 et café moulu).</p>
+                            <p data-i18n="tech_fondue_desc"><strong>Soirées Montagne :</strong> Un appareil à fondue ainsi que des jeux de société sont à votre disposition dans les placards pour passer de superbes soirées.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Arrival Inventory -->
+                <div class="glass-card-dark rounded-3xl p-6 sm:p-8 text-white shadow-2xl border border-amber-500/20 space-y-6">
+                    <div class="flex items-center gap-3 border-b border-amber-500/20 pb-4">
+                        <span class="text-3xl p-2.5 bg-amber-500/20 rounded-2xl border border-amber-400/30">📋</span>
+                        <div>
+                            <span class="text-xs font-bold text-amber-400 uppercase tracking-widest block" data-i18n="form_tag">Vérification de votre cocon</span>
+                            <h3 class="text-xl sm:text-2xl font-black text-white uppercase" data-i18n="form_title">Inventaire d'Arrivée</h3>
+                        </div>
+                    </div>
+
+                    <p class="text-slate-200 text-xs sm:text-sm leading-relaxed" data-i18n="form_desc">
+                        Partez à la découverte de votre cocon pièce par pièce et vérifiez que tout est bien là. Un équipement sale ou abîmé ? Signalez-le en une photo.
+                    </p>
+
+                    <div id="inventaire-app" class="scroll-mt-24"></div>
+                </div>
+
+            </div>
+
+            <!-- TAB 3 : DÉCOUVRIR LA PLAGNE -->
+            <div id="tab-decouvrir" class="tab-content space-y-6 hidden">
+                
+                <!-- Plans & Transports Header -->
+                <div class="glass-card-dark rounded-3xl p-6 sm:p-8 text-white shadow-2xl border border-amber-500/20 space-y-6">
+                    <div class="flex items-center gap-3 border-b border-amber-500/20 pb-4">
+                        <span class="text-3xl p-2 bg-amber-500/20 rounded-2xl border border-amber-400/30">🗺️</span>
+                        <div>
+                            <span class="text-xs font-black text-amber-400 uppercase tracking-widest block" data-i18n="explore_tag">Guide Pratique & Transport</span>
+                            <h2 class="text-2xl sm:text-3xl font-black text-white uppercase" data-i18n="explore_title">S'Orienter & Se Déplacer à La Plagne</h2>
+                        </div>
+                    </div>
+
+                    <!-- Cartes & Plans Links -->
+                    <div class="space-y-3">
+                        <h3 class="text-xs font-black text-amber-300 uppercase tracking-wider flex items-center gap-1.5" data-i18n="maps_section">
+                            <span>🗺️</span> Plans du Village & Domaine Skiable / Rando
+                        </h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            <a href="https://www.la-plagne.com/sites/default/files/brochures/pdf/Plan%20Belle%20Plagne%202022.pdf" target="_blank" class="bg-white/10 hover:bg-amber-500/20 border border-white/20 text-amber-200 p-3.5 rounded-2xl text-xs font-bold transition flex flex-col justify-between space-y-2">
+                                <span class="flex items-center gap-2 text-white"><span>🏠</span> <span data-i18n="map_bp">Plan Belle Plagne (PDF)</span></span>
+                                <span class="text-[10px] text-amber-300/80">Commerces & Résidences →</span>
+                            </a>
+                            <a href="https://www.la-plagne.com/carte-interactive-hiver" target="_blank" class="bg-white/10 hover:bg-amber-500/20 border border-white/20 text-amber-200 p-3.5 rounded-2xl text-xs font-bold transition flex flex-col justify-between space-y-2">
+                                <span class="flex items-center gap-2 text-white"><span>❄️</span> <span data-i18n="map_ski">Carte Ski Hiver</span></span>
+                                <span class="text-[10px] text-amber-300/80">Pistes & webcams →</span>
+                            </a>
+                            <a href="https://www.la-plagne.com/savourez-une-multitude-d-activites/la-plagne-l-ete/randonnee-pedestre-en-vanoise-et-en-tarentaise" target="_blank" class="bg-white/10 hover:bg-amber-500/20 border border-white/20 text-amber-200 p-3.5 rounded-2xl text-xs font-bold transition flex flex-col justify-between space-y-2">
+                                <span class="flex items-center gap-2 text-white"><span>🥾</span> <span data-i18n="map_hike">Carte Sentiers & VTT Été</span></span>
+                                <span class="text-[10px] text-amber-300/80">Randonnées & parcours VTAE →</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Transports Section -->
+                    <div class="space-y-3 pt-2">
+                        <h3 class="text-xs font-black text-amber-300 uppercase tracking-wider flex items-center gap-1.5" data-i18n="transports_section">
+                            <span>🚌</span> Transports & Navettes Gratuites d'Altitude
+                        </h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-200">
+                            <div class="bg-white/5 border border-white/10 p-3.5 rounded-2xl space-y-1.5">
+                                <p class="font-bold text-white flex items-center gap-1.5">
+                                    <span>🪂</span> Télécabine Belle Plagne ↔ Bellecôte
+                                </p>
+                                <p class="text-[11px] text-slate-300 leading-relaxed" data-i18n="gondola_desc">
+                                    Liaison téléportée <strong>100% Gratuite</strong> circulant 7j/7 de <strong>9h00 à 23h30</strong> non-stop entre Belle Plagne et Plagne Bellecôte.
+                                </p>
+                            </div>
+                            
+                            <div class="bg-white/5 border border-white/10 p-3.5 rounded-2xl space-y-1.5">
+                                <p class="font-bold text-white flex items-center gap-1.5">
+                                    <span>🚌</span> Navettes Gratuites Inter-Stations
+                                </p>
+                                <p class="text-[11px] text-slate-300 leading-relaxed" data-i18n="shuttle_desc">
+                                    Bus fréquents reliant Plagne Bellecôte, Plagne Centre, Plagne 1800 et Aime 2000.
+                                </p>
+                                <a href="https://www.la-plagne.com/decouvrir-la-plagne/pratique/navettes-liaisons/navettes-liaisons-en-altitude" target="_blank" class="inline-block text-[11px] text-amber-300 font-bold hover:underline pt-0.5">
+                                    Fiche horaires PDF →
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="bg-amber-500/10 border border-amber-400/20 p-3 rounded-xl flex items-center justify-between text-xs text-amber-200">
+                            <span class="flex items-center gap-2"><span>📱</span> <strong>Astuce Yuge :</strong> Suivez les navettes en direct sur l'application officielle La Plagne (Yuge).</span>
+                        </div>
+                    </div>
+
+                    <!-- Quick Booking Links -->
+                    <div class="bg-white/5 border border-white/10 p-4 rounded-2xl space-y-3">
+                        <h3 class="text-xs font-black text-amber-300 uppercase tracking-wider flex items-center gap-1.5" data-i18n="bookings_section">
+                            <span>🎫</span> Réservations Rapides & Ski
+                        </h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                            <a href="https://www.skipass-laplagne.com/fr/forfaits-ski" target="_blank" class="bg-white/10 hover:bg-amber-500/20 border border-white/20 text-white p-3 rounded-xl text-xs font-bold transition flex items-center justify-between">
+                                <span>🎿 Forfaits Ski La Plagne</span> →
+                            </a>
+                            <a href="https://www.lesbainsdebelleplagne.fr/" target="_blank" class="bg-white/10 hover:bg-amber-500/20 border border-white/20 text-white p-3 rounded-xl text-xs font-bold transition flex items-center justify-between">
+                                <span>🧘 Spa Deep Nature (Bains)</span> →
+                            </a>
+                            <a href="https://www.esf-belleplagne.com" target="_blank" class="bg-white/10 hover:bg-amber-500/20 border border-white/20 text-white p-3 rounded-xl text-xs font-bold transition flex items-center justify-between">
+                                <span>🏔️ ESF Belle Plagne</span> →
+                            </a>
+                            <a href="https://oxygene.ski/fr/ecole-ski-belle-plagne/" target="_blank" class="bg-white/10 hover:bg-amber-500/20 border border-white/20 text-white p-3 rounded-xl text-xs font-bold transition flex items-center justify-between">
+                                <span>⛷️ École de Ski Oxygène</span> →
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Winter Season Highlights -->
+                <div class="glass-card rounded-3xl p-6 sm:p-8 shadow-xl space-y-6">
+                    <div class="flex items-center justify-between flex-wrap gap-3 border-b border-amber-900/10 pb-4">
+                        <div class="flex items-center gap-3">
+                            <span class="text-3xl p-2.5 bg-[#1b2b48] text-amber-300 rounded-2xl shadow-md">❄️</span>
+                            <div>
+                                <span class="text-[10px] font-black text-[#c86d2a] uppercase tracking-widest block" data-i18n="winter_tag">Saison d'Hiver</span>
+                                <h3 class="text-xl sm:text-2xl font-black text-[#1b2b48] uppercase" data-i18n="winter_title">Pépites Glisse & Rando au Pied de l'Immeuble</h3>
+                            </div>
+                        </div>
+                        <a href="https://www.la-plagne.com/savourez-une-multitude-d-activites/immergez-vous-au-coeur-de-l-hiver" target="_blank" class="bg-[#1b2b48] hover:bg-[#23385d] text-amber-300 text-xs font-bold px-4 py-2 rounded-xl transition shadow-md">
+                            Catalogue Hiver →
+                        </a>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-white/90 p-5 rounded-2xl border border-amber-900/10 space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-black text-[#c86d2a] uppercase tracking-wider">🎿 Ski de Randonnée</span>
+                                <span class="text-[10px] bg-amber-500/20 text-[#1b2b48] font-bold px-2 py-0.5 rounded-md">Porte de l'Immeuble</span>
+                            </div>
+                            <p class="text-slate-700 text-xs leading-relaxed" data-i18n="winter_skitour_desc">
+                                Chaussez vos peaux de phoque directement au pied de la résidence ! Empruntez le parcours balisé et sécurisé reliant Belle Plagne au <strong>Col de Forcle</strong> ou remontez vers la Roche de Mio. Descente très facile par la piste bleue.
+                            </p>
+                        </div>
+
+                        <div class="bg-white/90 p-5 rounded-2xl border border-amber-900/10 space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-black text-[#1b2b48] uppercase tracking-wider">🥾 Raquettes & Balades</span>
+                                <span class="text-[10px] bg-[#1b2b48]/10 text-[#1b2b48] font-bold px-2 py-0.5 rounded-md">Départ Direct</span>
+                            </div>
+                            <p class="text-slate-700 text-xs leading-relaxed" data-i18n="winter_snowshoe_desc">
+                                Parcours des Mairiers ou boucle des berges vers Plagne Bellecôte. Magnifiques sentiers enneigés à travers la forêt d'épicéas sans avoir à reprendre votre véhicule.
+                            </p>
+                        </div>
+
+                        <div class="bg-white/90 p-5 rounded-2xl border border-amber-900/10 space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-black text-[#c86d2a] uppercase tracking-wider">🛷 Colorado Park (Luge)</span>
+                                <span class="text-[10px] bg-amber-500/20 text-[#1b2b48] font-bold px-2 py-0.5 rounded-md">Plagne Centre</span>
+                            </div>
+                            <p class="text-slate-700 text-xs leading-relaxed" data-i18n="winter_luge_desc">
+                                1,5 km de piste de luge dédiée avec virages relevés et vue imprenable sur le Mont-Blanc. Accessible via la télécabine gratuite ou navette.
+                            </p>
+                        </div>
+
+                        <div class="bg-white/90 p-5 rounded-2xl border border-amber-900/10 space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-black text-[#1b2b48] uppercase tracking-wider">🏎️ Bobsleigh Olympique</span>
+                                <span class="text-[10px] bg-[#1b2b48]/10 text-[#1b2b48] font-bold px-2 py-0.5 rounded-md">La Roche</span>
+                            </div>
+                            <p class="text-slate-700 text-xs leading-relaxed" data-i18n="winter_bob_desc">
+                                L'unique piste de bobsleigh de France ! Testez le Bob Raft (auto-freiné dès 1m30) ou le Speed Luge pour des montées d'adrénaline jusqu'à 120 km/h.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Summer Season Highlights -->
+                <div class="glass-card rounded-3xl p-6 sm:p-8 shadow-xl space-y-6">
+                    <div class="flex items-center justify-between flex-wrap gap-3 border-b border-amber-900/10 pb-4">
+                        <div class="flex items-center gap-3">
+                            <span class="text-3xl p-2.5 bg-[#c86d2a] text-white rounded-2xl shadow-md">☀️</span>
+                            <div>
+                                <span class="text-[10px] font-black text-[#c86d2a] uppercase tracking-widest block" data-i18n="summer_tag">Saison d'Été</span>
+                                <h3 class="text-xl sm:text-2xl font-black text-[#1b2b48] uppercase" data-i18n="summer_title">Pépites Outdoor & Randonnées au Village</h3>
+                            </div>
+                        </div>
+                        <a href="https://www.la-plagne.com/savourez-une-multitude-d-activites/plongez-au-coeur-de-l-ete" target="_blank" class="bg-[#c86d2a] hover:bg-[#b05c20] text-white text-xs font-bold px-4 py-2 rounded-xl transition shadow-md">
+                            Catalogue Été →
+                        </a>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-white/90 p-5 rounded-2xl border border-amber-900/10 space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-black text-[#c86d2a] uppercase tracking-wider">🧗 Via Ferrata des Bourtes</span>
+                                <span class="text-[10px] bg-amber-500/20 text-[#1b2b48] font-bold px-2 py-0.5 rounded-md">Départ à Pied</span>
+                            </div>
+                            <p class="text-slate-700 text-xs leading-relaxed" data-i18n="summer_via_desc">
+                                Située juste au-dessus du village (45 min de marche d'approche). 600m de parcours rocheux équipé, pont de singe, 2 tyroliennes et vue panoramique sur le Mont-Blanc !
+                            </p>
+                        </div>
+
+                        <div class="bg-white/90 p-5 rounded-2xl border border-amber-900/10 space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-black text-[#1b2b48] uppercase tracking-wider">🥾 Lac Vert & BBQ</span>
+                                <span class="text-[10px] bg-[#1b2b48]/10 text-[#1b2b48] font-bold px-2 py-0.5 rounded-md">Rando Directe</span>
+                            </div>
+                            <p class="text-slate-700 text-xs leading-relaxed" data-i18n="summer_lake_desc">
+                                Magnifique boucle accessible au départ de Belle Plagne. Barbecues en libre accès et aire de pique-nique au bord du Lac Vert face au sommet du Mont-Blanc.
+                            </p>
+                        </div>
+
+                        <div class="bg-white/90 p-5 rounded-2xl border border-amber-900/10 space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-black text-[#c86d2a] uppercase tracking-wider">🦅 Aérolive & Parapente</span>
+                                <span class="text-[10px] bg-amber-500/20 text-[#1b2b48] font-bold px-2 py-0.5 rounded-md">Sensations</span>
+                            </div>
+                            <p class="text-slate-700 text-xs leading-relaxed" data-i18n="summer_aero_desc">
+                                Montez à la Roche de Mio en télécabine ! Testez <strong>Aérolive</strong> (cabines ouvertes aux quatre vents jusqu'à Live 3000) ou prenez votre envol en Parapente biplace.
+                            </p>
+                        </div>
+
+                        <div class="bg-white/90 p-5 rounded-2xl border border-amber-900/10 space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-black text-[#1b2b48] uppercase tracking-wider">🚴 Bike Park & VTTAE</span>
+                                <span class="text-[10px] bg-[#1b2b48]/10 text-[#1b2b48] font-bold px-2 py-0.5 rounded-md">Accès Remontées</span>
+                            </div>
+                            <p class="text-slate-700 text-xs leading-relaxed" data-i18n="summer_bike_desc">
+                                Pistes de descente balisées tous niveaux et itinéraires VTAE reliant le vallon de l'Ours. Location de VTT et cours encadrés au centre du village.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Commerces & Urgences -->
+                <div class="glass-card-dark text-white p-6 rounded-3xl border border-amber-500/20 shadow-xl space-y-4">
+                    <h3 class="font-black text-lg text-amber-300 uppercase flex items-center gap-2 border-b border-amber-500/20 pb-3" data-i18n="emergency_title">
+                        🛒 Commerces & Numéros d'Urgence
+                    </h3>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-slate-200">
+                        <div class="space-y-1.5">
+                            <p>• <strong>Boulangerie :</strong> Le Matafan (Pain frais dès 7h30 au centre commercial)</p>
+                            <p>• <strong>Supermarchés :</strong> Sherpa (Haut) & Spar (Bas)</p>
+                        </div>
+                        <div class="space-y-1.5">
+                            <p>• <strong>Pharmacie :</strong> <a href="tel:+33479090481" class="text-amber-300 font-bold underline">04 79 09 04 81</a></p>
+                            <p>• <strong>Cabinet Médical :</strong> <a href="tel:+33479090466" class="text-amber-300 font-bold underline">04 79 09 04 66</a></p>
+                            <p>• <strong>Secours Pistes :</strong> <a href="tel:+33479096705" class="text-amber-300 font-bold underline">04 79 09 67 05</a> | <strong>Urgence :</strong> 112</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- TAB 4 : FIN DE SÉJOUR & AVIS -->
+            <div id="tab-depart" class="tab-content space-y-6 hidden">
+                
+                <!-- Checklist Header -->
+                <div class="glass-card rounded-3xl p-6 sm:p-8 shadow-xl space-y-6">
+                    <div class="flex items-center justify-between flex-wrap gap-3 border-b border-amber-900/10 pb-4">
+                        <div class="flex items-center gap-3">
+                            <span class="text-3xl p-2.5 bg-[#c86d2a] text-white rounded-2xl shadow-md">🧹</span>
+                            <div>
+                                <span class="text-[10px] font-black text-[#c86d2a] uppercase tracking-widest block" data-i18n="depart_tag">Avant de restituer les clés</span>
+                                <h2 class="text-xl sm:text-2xl font-black text-[#1b2b48] uppercase" data-i18n="depart_title">Checklist de Fin de Séjour</h2>
+                            </div>
+                        </div>
+                        <span class="text-[11px] bg-amber-100 text-amber-900 px-3 py-1 rounded-full font-bold border border-amber-300" data-i18n="depart_memory_tag">
+                            💾 Mémoire 24H
+                        </span>
+                    </div>
+
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed" data-i18n="depart_desc">
+                        Cochez les tâches réalisées au fur et à mesure de vos préparatifs. Vos coches sont sauvegardées automatiquement sur votre téléphone pendant 24 heures.
+                    </p>
+
+                    <!-- Interactive Checklist -->
+                    <div class="space-y-3" id="checklist-container">
+                        <label class="flex items-center gap-3 bg-white/90 p-4 rounded-2xl border border-amber-900/10 cursor-pointer hover:bg-amber-50/50 transition">
+                            <input type="checkbox" id="chk-1" class="w-5 h-5 rounded border-amber-400 text-[#1b2b48] focus:ring-amber-400 accent-[#c86d2a]">
+                            <span class="text-xs sm:text-sm font-bold text-[#1b2b48]" data-i18n="chk_1">Radiateurs : TOUS ÉTEINTS</span>
+                        </label>
+
+                        <label class="flex items-center gap-3 bg-white/90 p-4 rounded-2xl border border-amber-900/10 cursor-pointer hover:bg-amber-50/50 transition">
+                            <input type="checkbox" id="chk-2" class="w-5 h-5 rounded border-amber-400 text-[#1b2b48] focus:ring-amber-400 accent-[#c86d2a]">
+                            <span class="text-xs sm:text-sm font-medium text-slate-800" data-i18n="chk_2">Poubelles vidées & jetées aux conteneurs extérieurs</span>
+                        </label>
+
+                        <label class="flex items-center gap-3 bg-white/90 p-4 rounded-2xl border border-amber-900/10 cursor-pointer hover:bg-amber-50/50 transition">
+                            <input type="checkbox" id="chk-3" class="w-5 h-5 rounded border-amber-400 text-[#1b2b48] focus:ring-amber-400 accent-[#c86d2a]">
+                            <span class="text-xs sm:text-sm font-medium text-slate-800" data-i18n="chk_3">Frigo vide & propre, Lave-vaisselle vidé et rangé</span>
+                        </label>
+
+                        <label class="flex items-center gap-3 bg-white/90 p-4 rounded-2xl border border-amber-900/10 cursor-pointer hover:bg-amber-50/50 transition">
+                            <input type="checkbox" id="chk-4" class="w-5 h-5 rounded border-amber-400 text-[#1b2b48] focus:ring-amber-400 accent-[#c86d2a]">
+                            <span class="text-xs sm:text-sm font-medium text-slate-800" data-i18n="chk_4">Fenêtres & Baie vitrée soigneusement verrouillées</span>
+                        </label>
+
+                        <label class="flex items-center gap-3 bg-white/90 p-4 rounded-2xl border border-amber-900/10 cursor-pointer hover:bg-amber-50/50 transition">
+                            <input type="checkbox" id="chk-5" class="w-5 h-5 rounded border-amber-400 text-[#1b2b48] focus:ring-amber-400 accent-[#c86d2a]">
+                            <span class="text-xs sm:text-sm font-bold text-[#1b2b48]" data-i18n="chk_5">Clés & Badge remis dans la boîte à clés (Code 2410 brouillé)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Évaluation & 5 Étoiles Card -->
+                <div class="glass-card-dark rounded-3xl p-6 sm:p-8 text-white text-center shadow-2xl border border-amber-500/20 space-y-6">
+                    <div class="text-amber-400 text-3xl sm:text-4xl tracking-widest animate-pulse">⭐⭐⭐⭐⭐</div>
+                    
+                    <div>
+                        <h3 class="text-2xl font-black uppercase text-white mb-2" data-i18n="review_title">Votre séjour a été magique ?</h3>
+                        <p class="text-slate-200 text-xs sm:text-sm leading-relaxed max-w-md mx-auto" data-i18n="review_desc">
+                            Votre satisfaction est notre priorité. Si vous avez passé un bon moment, un avis <strong>5 étoiles</strong> sur votre plateforme de réservation est la plus belle récompense pour notre cocon d'altitude !
+                        </p>
+                    </div>
+
+                    <!-- Problem Help Box -->
+                    <div class="bg-white/10 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-white/20 text-left max-w-md mx-auto space-y-2">
+                        <p class="font-bold text-amber-300 text-xs sm:text-sm flex items-center gap-2">
+                            <span>⚠️</span> <span data-i18n="review_issue_title">Un problème ou un dysfonctionnement ?</span>
+                        </p>
+                        <p class="text-xs text-slate-200 leading-relaxed" data-i18n="review_issue_desc">
+                            Un souci de propreté, une panne ou un oubli ? <strong>Ne restez pas sur une impression négative !</strong> Contactez-moi immédiatement pour me laisser la possibilité d'intervenir rapidement.
+                        </p>
+                    </div>
+
+                    <a href="tel:+33678539732" class="inline-block bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-[#1b2b48] px-8 py-3.5 rounded-2xl font-black text-xs sm:text-sm uppercase tracking-wider transition shadow-lg transform hover:-translate-y-0.5">
+                        📞 <span data-i18n="btn_contact_direct">Me Contacter Directement</span>
+                    </a>
+                </div>
+
+            </div>
+
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="mt-12 py-6 text-center text-slate-300 text-xs border-t border-white/10 glass-card-dark">
+            <p>© Jérôme POUTEAU • Licorne 416 • Belle Plagne</p>
+        </footer>
+
+    </div>
+
+    <!-- MOBILE BOTTOM NAVIGATION BAR -->
+    <nav class="fixed bottom-0 left-0 right-0 z-50 bg-[#1b2b48]/95 backdrop-blur-lg border-t border-amber-500/30 text-white md:hidden shadow-2xl px-2 py-1.5 flex justify-around items-center">
+        <button onclick="switchTab('accueil')" id="nav-mobile-accueil" class="mobile-tab-btn flex flex-col items-center gap-0.5 py-1 px-2 text-amber-400 font-bold transition">
+            <i class="fas fa-home text-base"></i>
+            <span class="text-[10px]" data-i18n="mob_home">Accueil</span>
+        </button>
+        <button onclick="switchTab('logement')" id="nav-mobile-logement" class="mobile-tab-btn flex flex-col items-center gap-0.5 py-1 px-2 text-slate-300 hover:text-white transition">
+            <i class="fas fa-key text-base"></i>
+            <span class="text-[10px]" data-i18n="mob_lodging">Logement</span>
+        </button>
+        <button onclick="switchTab('decouvrir')" id="nav-mobile-decouvrir" class="mobile-tab-btn flex flex-col items-center gap-0.5 py-1 px-2 text-slate-300 hover:text-white transition">
+            <i class="fas fa-mountain text-base"></i>
+            <span class="text-[10px]" data-i18n="mob_explore">Découvrir</span>
+        </button>
+        <button onclick="switchTab('depart')" id="nav-mobile-depart" class="mobile-tab-btn flex flex-col items-center gap-0.5 py-1 px-2 text-slate-300 hover:text-white transition">
+            <i class="fas fa-check-circle text-base"></i>
+            <span class="text-[10px]" data-i18n="mob_depart">Départ</span>
+        </button>
+    </nav>
+
+    <!-- TRANSLATION & LOGIC JAVASCRIPT -->
+    <script>
+        // Multi-language Dictionaries
+        const i18n = {
+            fr: {
+                nav_home: "Accueil & Arrivée",
+                nav_lodging: "Logement & Inventaire",
+                nav_explore: "Découvrir La Plagne",
+                nav_depart: "Départ & Avis",
+                mob_home: "Accueil",
+                mob_lodging: "Logement",
+                mob_explore: "Découvrir",
+                mob_depart: "Départ",
+                welcome_title: "Bienvenue à la Licorne 416",
+                welcome_subtitle: "Votre cocon d'altitude chaleureux au cœur du domaine Paradiski",
+                host_tag: "Votre Hôte",
+                host_title: "Le mot de Jérôme",
+                host_text: "Bonjour et bienvenue ! Ayant grandi dans la vallée à Aime, j'ai passé toute mon enfance à dévaler les pistes de ce domaine d'exception et à parcourir ses magnifiques chemins de randonnée. Après mes études à Lyon et une carrière à Paris, cet appartement représente pour moi un véritable retour aux sources : un havre de paix où retrouver ces moments de bien-être uniques que seule la montagne sait offrir, été comme hiver.<br><br>J'ai conçu ce guide interactif pour que votre séjour soit aussi simple, autonome et agréable que possible. Je vous souhaite d'y vivre d'aussi beaux souvenirs que les miens !",
+                contact_host_tag: "Votre Hôte",
+                contact_concierge_tag: "Conciergerie (Linge & Draps)",
+                btn_call: "Appeler",
+                gps_tag: "Cap sur Belle Plagne",
+                gps_title: "Itinéraire Direct vers le Parking Haut",
+                gps_google: "Ouvrir dans Google Maps",
+                gps_waze: "Lancer avec Waze",
+                parking_summer_title: "☀️ Saison d'Été :",
+                parking_summer_desc: "Stationnement 100% Gratuit sur l'ensemble du parking amont !",
+                parking_winter_title: "❄️ Saison d'Hiver :",
+                parking_winter_desc: "Payant, mais un accès dépose-minute gratuit est autorisé pour vous garer temporairement au plus près du bâtiment et décharger vos bagages facilement.",
+                access_title: "🗝️ Accès, Boîte à Clés & Casier",
+                access_keybox_title: "Boîte à clés (Porte 416)",
+                access_keybox_desc: "Fixée directement sur la porte d'entrée de l'appartement au 4ᵉ étage.",
+                access_keybox_tip: "💡 N'oubliez pas de brouiller le code après ouverture.",
+                access_badge_title: "Badge d'Accès (sur le trousseau)",
+                access_badge_desc: "L'accès à la boîte à clés depuis le parking est libre. Le badge accroché au trousseau sert à :",
+                badge_item_1: "L'utilisation de l'ascenseur",
+                badge_item_2: "L'accès au local des casiers à skis",
+                badge_item_3: "L'ouverture de la porte RDC donnant directement sur la piste",
+                access_ski_title: "Casier à Skis n°31 (RDC)",
+                access_ski_desc: "Situé dans le local du RDC. Code du cadenas :",
+                access_ski_dryer: "🔥 <strong>Sèche-chaussures électriques inclus !</strong> Profitez des chauffe-chaussures installés dans le casier pour des chaussures bien chaudes chaque matin.",
+                checkin_label: "Arrivée (Check-in)",
+                checkin_time: "Dès 16h00",
+                checkout_label: "Départ (Check-out)",
+                checkout_time: "Avant 10h00",
+                tech_title: "Guide Technique & Équipements",
+                tech_subtitle: "Consignes pratiques pour le bon fonctionnement de votre cocon",
+                tech_water_title: "Arrivée d'Eau (4 Vannes)",
+                tech_water_alert: "ℹ️ Les 4 vannes sont <strong>normalement OUVERTES</strong>. Merci de ne les manipuler qu'en cas de fuite d'eau ou de problème technique.",
+                tech_water_kitchen: "<strong>Cuisine (2 vannes) :</strong> Situées sous l'évier dans le meuble, accessibles en passant la main derrière la plaque en bois fin au fond.",
+                tech_water_bathroom: "<strong>Salle de Bains (2 vannes) :</strong> Situées sous le meuble de la SDB, accessibles par une ouverture en bas à gauche au fond du meuble.",
+                tech_elec_title: "Électricité & Chauffage",
+                tech_elec_desc: "<strong>Compteur Électrique :</strong> Situé dans le couloir d'entrée. L'électricité est activée. En cas de disjonction, réenclenchez le <strong>bouton principal tout en bas</strong> du tableau.",
+                tech_heating_desc: "<strong>Chauffage :</strong> Température conseillée entre 19°C et 20°C. Pensez à baisser les radiateurs lorsque vous aérez l'appartement.",
+                tech_kitchen_title: "Cafetière & Équipements Conviviaux",
+                tech_coffee_desc: "<strong>Cafetière :</strong> Cafetière électrique à filtre traditionnelle (prévoir filtres n°4 et café moulu).",
+                tech_fondue_desc: "<strong>Soirées Montagne :</strong> Un appareil à fondue ainsi que des jeux de société sont à votre disposition dans les placards pour passer de superbes soirées.",
+                form_tag: "Vérification de votre cocon",
+                form_title: "Inventaire d'Arrivée",
+                form_desc: "Partez à la découverte de votre cocon pièce par pièce et vérifiez que tout est bien là. Un équipement sale ou abîmé ? Signalez-le en une photo.",
+                explore_tag: "Guide Pratique & Transport",
+                explore_title: "S'Orienter & Se Déplacer à La Plagne",
+                maps_section: "Plans du Village & Domaine Skiable / Rando",
+                map_bp: "Plan Belle Plagne (PDF)",
+                map_ski: "Carte Ski Hiver",
+                map_hike: "Carte Sentiers & VTT Été",
+                transports_section: "Transports & Navettes Gratuites d'Altitude",
+                gondola_desc: "Liaison téléportée <strong>100% Gratuite</strong> circulant 7j/7 de <strong>9h00 à 23h30</strong> non-stop entre Belle Plagne et Plagne Bellecôte.",
+                shuttle_desc: "Bus fréquents reliant Plagne Bellecôte, Plagne Centre, Plagne 1800 et Aime 2000.",
+                bookings_section: "Réservations Rapides & Ski",
+                winter_tag: "Saison d'Hiver",
+                winter_title: "Pépites Glisse & Rando au Pied de l'Immeuble",
+                winter_skitour_desc: "Chaussez vos peaux de phoque directement au pied de la résidence ! Empruntez le parcours balisé et sécurisé reliant Belle Plagne au <strong>Col de Forcle</strong> ou remontez vers la Roche de Mio. Descente très facile par la piste bleue.",
+                winter_snowshoe_desc: "Parcours des Mairiers ou boucle des berges vers Plagne Bellecôte. Magnifiques sentiers enneigés à travers la forêt d'épicéas sans avoir à reprendre votre véhicule.",
+                winter_luge_desc: "1,5 km de piste de luge dédiée avec virages relevés et vue imprenable sur le Mont-Blanc. Accessible via la télécabine gratuite ou navette.",
+                winter_bob_desc: "L'unique piste de bobsleigh de France ! Testez le Bob Raft (auto-freiné dès 1m30) ou le Speed Luge pour des montées d'adrénaline jusqu'à 120 km/h.",
+                summer_tag: "Saison d'Été",
+                summer_title: "Pépites Outdoor & Randonnées au Village",
+                summer_via_desc: "Située juste au-dessus du village (45 min de marche d'approche). 600m de parcours rocheux équipé, pont de singe, 2 tyroliennes et vue panoramique sur le Mont-Blanc !",
+                summer_lake_desc: "Magnifique boucle accessible au départ de Belle Plagne. Barbecues en libre accès et aire de pique-nique au bord du Lac Vert face au sommet du Mont-Blanc.",
+                summer_aero_desc: "Montez à la Roche de Mio en télécabine ! Testez <strong>Aérolive</strong> (cabines ouvertes aux quatre vents jusqu'à Live 3000) ou prenez votre envol en Parapente biplace.",
+                summer_bike_desc: "Pistes de descente balisées tous niveaux et itinéraires VTAE reliant le vallon de l'Ours. Location de VTT et cours encadrés au centre du village.",
+                emergency_title: "Commerces & Numéros d'Urgence",
+                depart_tag: "Avant de restituer les clés",
+                depart_title: "Checklist de Fin de Séjour",
+                depart_memory_tag: "Mémoire 24H",
+                depart_desc: "Cochez les tâches réalisées au fur et à mesure de vos préparatifs. Vos coches sont sauvegardées automatiquement sur votre téléphone pendant 24 heures.",
+                chk_1: "Radiateurs : TOUS ÉTEINTS",
+                chk_2: "Poubelles vidées & jetées aux conteneurs extérieurs",
+                chk_3: "Frigo vide & propre, Lave-vaisselle vidé et rangé",
+                chk_4: "Fenêtres & Baie vitrée soigneusement verrouillées",
+                chk_5: "Clés & Badge remis dans la boîte à clés (Code 2410 brouillé)",
+                review_title: "Votre séjour a été magique ?",
+                review_desc: "Votre satisfaction est notre priorité. Si vous avez passé un bon moment, un avis <strong>5 étoiles</strong> sur votre plateforme de réservation est la plus belle récompense pour notre cocon d'altitude !",
+                review_issue_title: "Un problème ou un dysfonctionnement ?",
+                review_issue_desc: "Un souci de propreté, une panne ou un oubli ? <strong>Ne restez pas sur une impression négative !</strong> Contactez-moi immédiatement pour me laisser la possibilité d'intervenir rapidement.",
+                btn_contact_direct: "Me Contacter Directement"
+            },
+            en: {
+                nav_home: "Welcome & Arrival",
+                nav_lodging: "Apartment & Inventory",
+                nav_explore: "Discover La Plagne",
+                nav_depart: "Departure & Review",
+                mob_home: "Home",
+                mob_lodging: "Lodging",
+                mob_explore: "Explore",
+                mob_depart: "Departure",
+                welcome_title: "Welcome to Licorne 416",
+                welcome_subtitle: "Your warm high-altitude cocoon in the heart of the Paradiski area",
+                host_tag: "Your Host",
+                host_title: "A word from Jérôme",
+                host_text: "Hello and welcome! Having grown up in the valley in Aime, I spent my entire childhood skiing on these slopes and hiking these magnificent trails. After my studies in Lyon and a career in Paris, this apartment represents a true homecoming for me: a peaceful haven to rediscover those unique mountain moments, summer and winter alike.<br><br>I designed this interactive guide to make your stay as smooth, autonomous, and enjoyable as possible. I wish you wonderful memories here!",
+                contact_host_tag: "Your Host",
+                contact_concierge_tag: "Concierge (Linen & Sheets)",
+                btn_call: "Call",
+                gps_tag: "Heading to Belle Plagne",
+                gps_title: "Direct Route to Top Parking",
+                gps_google: "Open in Google Maps",
+                gps_waze: "Launch with Waze",
+                parking_summer_title: "☀️ Summer Season:",
+                parking_summer_desc: "100% Free parking across the upper parking lot!",
+                parking_winter_title: "❄️ Winter Season:",
+                parking_winter_desc: "Paid parking, but a free quick drop-off access is allowed to temporarily park right near the building and unload luggage easily.",
+                access_title: "🗝️ Access, Key Box & Ski Locker",
+                access_keybox_title: "Key Box (Door 416)",
+                access_keybox_desc: "Fixed directly on the apartment entrance door on the 4th floor.",
+                access_keybox_tip: "💡 Remember to scramble the code after opening.",
+                access_badge_title: "Access Badge (on keyring)",
+                access_badge_desc: "Access to the key box from the parking lot is free. The badge on the keyring is used for:",
+                badge_item_1: "Elevator access",
+                badge_item_2: "Ski locker room access",
+                badge_item_3: "Opening the ground floor door leading directly to the slope",
+                access_ski_title: "Ski Locker #31 (Ground Floor)",
+                access_ski_desc: "Located in the ground floor room. Padlock code:",
+                access_ski_dryer: "🔥 <strong>Electric boot dryers included!</strong> Enjoy warm and dry boots every morning before hitting the slopes.",
+                checkin_label: "Check-in",
+                checkin_time: "From 4:00 PM",
+                checkout_label: "Check-out",
+                checkout_time: "Before 10:00 AM",
+                tech_title: "Technical Guide & Facilities",
+                tech_subtitle: "Practical instructions for your apartment",
+                tech_water_title: "Water Supply (4 Valves)",
+                tech_water_alert: "ℹ️ The 4 valves are <strong>normally OPEN</strong>. Please only touch them in case of water leak or technical issue.",
+                tech_water_kitchen: "<strong>Kitchen (2 valves):</strong> Located under the sink, accessible by reaching behind the thin wooden panel at the back.",
+                tech_water_bathroom: "<strong>Bathroom (2 valves):</strong> Located under the bathroom vanity, accessible through a bottom-left opening.",
+                tech_elec_title: "Electricity & Heating",
+                tech_elec_desc: "<strong>Electric Panel:</strong> Located in the entry hallway. In case of trip, reset the <strong>main bottom switch</strong>.",
+                tech_heating_desc: "<strong>Heating:</strong> Recommended temperature between 19°C and 20°C. Please turn down radiators when airing out the apartment.",
+                tech_kitchen_title: "Coffee Maker & Amenities",
+                tech_coffee_desc: "<strong>Coffee Maker:</strong> Traditional filter coffee maker (use #4 paper filters and ground coffee).",
+                tech_fondue_desc: "<strong>Cozy Evenings:</strong> A fondue set and board games are in the cupboards for great evenings with family or friends.",
+                form_tag: "Check-in verification",
+                form_title: "Arrival Inventory",
+                form_desc: "Explore your cocoon room by room and check everything is there. Something dirty or damaged? Report it with a photo.",
+                explore_tag: "Practical Guide & Transport",
+                explore_title: "Orientation & Getting Around La Plagne",
+                maps_section: "Village & Ski / Hiking Maps",
+                map_bp: "Belle Plagne Map (PDF)",
+                map_ski: "Winter Ski Map",
+                map_hike: "Summer Trails & Bike Map",
+                transports_section: "Free Altitude Shuttles & Cable Car",
+                gondola_desc: "<strong>100% Free</strong> gondola link operating 7 days a week from <strong>9:00 AM to 11:30 PM</strong> non-stop between Belle Plagne and Plagne Bellecôte.",
+                shuttle_desc: "Frequent free buses connecting Plagne Bellecôte, Plagne Centre, Plagne 1800, and Aime 2000.",
+                bookings_section: "Quick Ski & Activity Bookings",
+                winter_tag: "Winter Season",
+                winter_title: "Gliss & Hike Highlights from the Doorstep",
+                winter_skitour_desc: "Put on your skin skis right at the doorstep! Follow the marked path to <strong>Col de Forcle</strong> or Roche de Mio. Easy blue slope ride back down.",
+                winter_snowshoe_desc: "Les Mairiers path or Bellecôte loop. Beautiful snowy forest trails straight from the apartment without taking your car.",
+                winter_luge_desc: "1.5 km dedicated toboggan track with banked turns and Mont-Blanc views.",
+                winter_bob_desc: "The only Olympic bobsleigh track in France! Try Bob Raft or Speed Luge for adrenaline rushes up to 120 km/h.",
+                summer_tag: "Summer Season",
+                summer_title: "Outdoor Highlights & Hiking at the Village",
+                summer_via_desc: "Located just above the village (45 min walk). 600m equipped rock course, monkey bridge, 2 ziplines and Mont-Blanc panorama!",
+                summer_lake_desc: "Beautiful loop trail starting from Belle Plagne. Free BBQ spots and picnic area by Lac Vert facing Mont-Blanc.",
+                summer_aero_desc: "Take the gondola to Roche de Mio! Try <strong>Aérolive</strong> open-air cable car or tandem paragliding.",
+                summer_bike_desc: "Downhill MTB trails and E-bike routes connecting the Bear Valley. Bike rental in the village center.",
+                emergency_title: "Shops & Emergency Numbers",
+                depart_tag: "Before returning the keys",
+                depart_title: "Departure Checklist",
+                depart_memory_tag: "24H Auto-save",
+                depart_desc: "Check off tasks as you prepare for departure. Your checkboxes are automatically saved on your phone for 24 hours.",
+                chk_1: "Radiators: ALL TURNED OFF",
+                chk_2: "Trash emptied & taken to outdoor bins",
+                chk_3: "Fridge empty & clean, Dishwasher emptied and put away",
+                chk_4: "Windows & balcony doors carefully locked",
+                chk_5: "Keys & Badge put back in key box (Code 2410 scrambled)",
+                review_title: "Was your stay magical?",
+                review_desc: "Your satisfaction is our priority. If you enjoyed your time, leaving a <strong>5-star review</strong> on your booking platform is the best reward!",
+                review_issue_title: "Any issue or inconvenience?",
+                review_issue_desc: "Cleanliness issue, breakdown, or missing item? <strong>Please don't leave on a bad note!</strong> Contact me immediately so I can fix it for you quickly.",
+                btn_contact_direct: "Contact Me Directly"
+            },
+            nl: {
+                nav_home: "Welkom & Aankomst",
+                nav_lodging: "Appartement & Inventaris",
+                nav_explore: "Ontdek La Plagne",
+                nav_depart: "Vertrek & Beoordeling",
+                mob_home: "Home",
+                mob_lodging: "Appartement",
+                mob_explore: "Ontdek",
+                mob_depart: "Vertrek",
+                welcome_title: "Welkom bij Licorne 416",
+                welcome_subtitle: "Uw warme bergappartement in het hart van Paradiski",
+                host_tag: "Uw Gastheer",
+                host_title: "Een woord van Jérôme",
+                host_text: "Hallo en welkom! Opgroeiend in de vallei van Aime bracht ik mijn hele jeugd door op deze pistes en wandelpaden. Dit appartement is voor mij een heerlijke plek om te ontspannen en te genieten van de bergen.<br><br>Ik heb deze gids ontworpen om uw verblijf zo eenvoudig en aangenaam mogelijk te maken. Fijne vakantie!",
+                contact_host_tag: "Uw Gastheer",
+                contact_concierge_tag: "Conciërge (Linnen)",
+                btn_call: "Bellen",
+                gps_tag: "Naar Belle Plagne",
+                gps_title: "Directe Route naar Bovenste Parkeerplaats",
+                gps_google: "Open in Google Maps",
+                gps_waze: "Start met Waze",
+                parking_summer_title: "☀️ Zomerseizoen:",
+                parking_summer_desc: "100% Gratis parkeren op de bovenste parkeerplaats!",
+                parking_winter_title: "❄️ Winterseizoen:",
+                parking_winter_desc: "Betaald parkeren, maar een gratis korte stop is toegestaan vlakbij het gebouw om bagage uit te laden.",
+                access_title: "🗝️ Toegang, Sleutelkluis & Skilocker",
+                access_keybox_title: "Sleutelkluis (Deur 416)",
+                access_keybox_desc: "Direct op de voordeur op de 4e verdieping.",
+                access_keybox_tip: "💡 Vergeet niet de code te verdraaien na opening.",
+                access_badge_title: "Toegangsbadge",
+                access_badge_desc: "Sleutelkluis is vrij toegankelijk. De badge dient voor:",
+                badge_item_1: "Gebruik van de lift",
+                badge_item_2: "Toegang tot de ski-ruimte",
+                badge_item_3: "Deur naar de piste op de begane grond",
+                access_ski_title: "Skilocker #31 (Begane grond)",
+                access_ski_desc: "Gelegen in de skilocker ruimte. Cijferslot code:",
+                access_ski_dryer: "🔥 <strong>Elektrische schoendrogers inbegrepen!</strong> Geniet elke ochtend van warme en droge skischoenen.",
+                checkin_label: "Aankomst",
+                checkin_time: "Vanaf 16:00",
+                checkout_label: "Vertrek",
+                checkout_time: "Vóór 10:00",
+                tech_title: "Technische Gids",
+                tech_subtitle: "Praktische instructies voor uw verblijf",
+                tech_water_title: "Watertoevoer (4 Kranen)",
+                tech_water_alert: "ℹ️ De 4 kranen staan <strong>normaal OPEN</strong>.",
+                tech_water_kitchen: "<strong>Keuken:</strong> Onder de spoelbak.",
+                tech_water_bathroom: "<strong>Badkamer:</strong> Onder het badkamermeubel.",
+                tech_elec_title: "Elektriciteit & Verwarming",
+                tech_elec_desc: "<strong>Elektriciteitskast:</strong> In de hal.",
+                tech_heating_desc: "<strong>Verwarming:</strong> Aanbevolen temperatuur 19°C - 20°C.",
+                tech_kitchen_title: "Koffiezetapparaat & Voorzieningen",
+                tech_coffee_desc: "<strong>Koffie:</strong> Traditioneel filterkoffiezetapparaat.",
+                tech_fondue_desc: "<strong>Gezellige Avonden:</strong> Fonduestel en gezelschapsspellen aanwezig.",
+                form_tag: "Controle bij aankomst",
+                form_title: "Aankomst Inventaris",
+                form_desc: "Ontdek uw cocon kamer per kamer en controleer of alles aanwezig is. Iets vuil of beschadigd? Meld het met een foto.",
+                explore_tag: "Praktische Gids",
+                explore_title: "Oriëntatie & Vervoer in La Plagne",
+                maps_section: "Kaarten & Pisteplannen",
+                map_bp: "Belle Plagne Kaart (PDF)",
+                map_ski: "Winter Pisteplan",
+                map_hike: "Zomer Wandelkaart",
+                transports_section: "Gratis Lift & Pendelbussen",
+                gondola_desc: "<strong>100% Gratis</strong> gondelverbinding tussen 09:00 en 23:30.",
+                shuttle_desc: "Gratis bussen tussen de dorpen van La Plagne.",
+                bookings_section: "Snelle Boekingen",
+                winter_tag: "Winterseizoen",
+                winter_title: "Wintersport vanaf de Deur",
+                winter_skitour_desc: "Toerskiën direct vanaf het appartement naar Col de Forcle.",
+                winter_snowshoe_desc: "Sneeuwschoenwandelingen door het bos vanaf het appartement.",
+                winter_luge_desc: "1,5 km rodelbaan Colorado Park.",
+                winter_bob_desc: "Olympische bobslee-ijsbaan in La Roche.",
+                summer_tag: "Zomerseizoen",
+                summer_title: "Zomeractiviteiten in het Dorp",
+                summer_via_desc: "Via Ferrata des Bourtes op 45 min wandelen.",
+                summer_lake_desc: "Wandeling naar Lac Vert met picknick- en BBQ-plaatsen.",
+                summer_aero_desc: "Aérolive kabelbaan en parapludringen.",
+                summer_bike_desc: "Bike Park en E-mountainbike routes.",
+                emergency_title: "Winkels & Noodnummers",
+                depart_tag: "Vóór sleuteloverdracht",
+                depart_title: "Checklist voor Vertrek",
+                depart_memory_tag: "24U Geheugen",
+                depart_desc: "Vink de taken af. Uw keuzes worden 24 uur opgeslagen.",
+                chk_1: "Verwarming: ALLES UITGESCHAKELD",
+                chk_2: "Afval leeggemaakt & in buitencontainers gegooid",
+                chk_3: "Koelkast leeg & vaatwasser opgeruimd",
+                chk_4: "Ramen & deuren goed vergrendeld",
+                chk_5: "Sleutels & Badge terug in sleutelkluis (Code 2410 verdraaid)",
+                review_title: "Was uw verblijf fantastisch?",
+                review_desc: "Als u heeft genoten, is een <strong>5-sterren beoordeling</strong> de mooiste beloning!",
+                review_issue_title: "Probleem of opmerking?",
+                review_issue_desc: "Neem direct contact op zodat we het meteen kunnen oplossen.",
+                btn_contact_direct: "Direct Contact Opnemen"
+            },
+            de: {
+                nav_home: "Willkommen & Anreise",
+                nav_lodging: "Wohnung & Inventar",
+                nav_explore: "La Plagne Entdecken",
+                nav_depart: "Abreise & Bewertung",
+                mob_home: "Home",
+                mob_lodging: "Wohnung",
+                mob_explore: "Entdecken",
+                mob_depart: "Abreise",
+                welcome_title: "Willkommen in der Licorne 416",
+                welcome_subtitle: "Ihr gemütliches Bergappartement im Herzen von Paradiski",
+                host_tag: "Ihr Gastgeber",
+                host_title: "Ein Wort von Jérôme",
+                host_text: "Hallo und willkommen! Aufgewachsen im Tal von Aime, habe ich meine Jugend auf diesen Pisten verbracht. Dieses Appartement ist für mich ein Ort der Erholung.<br><br>Ich habe diesen interaktiven Leitfaden erstellt, um Ihren Aufenthalt so einfach wie möglich zu gestalten. Schönen Urlaub!",
+                contact_host_tag: "Ihr Gastgeber",
+                contact_concierge_tag: "Concierge (Bettwäsche)",
+                btn_call: "Anrufen",
+                gps_tag: "Auf nach Belle Plagne",
+                gps_title: "Direkte Route zum Oberen Parkplatz",
+                gps_google: "In Google Maps Öffnen",
+                gps_waze: "Mit Waze Starten",
+                parking_summer_title: "☀️ Sommer-Saison:",
+                parking_summer_desc: "100% Kostenloses Parken auf dem oberen Parkplatz!",
+                parking_winter_title: "❄️ Winter-Saison:",
+                parking_winter_desc: "Kostenpflichtig, aber kurzes Ausladen direkt am Gebäude ist erlaubt.",
+                access_title: "🗝️ Zugang, Schlüsselsafe & Skibox",
+                access_keybox_title: "Schlüsselsafe (Tür 416)",
+                access_keybox_desc: "Direkt an der Wohnungstür im 4. Stock.",
+                access_keybox_tip: "💡 Bitte verstellen Sie den Code nach dem Öffnen.",
+                access_badge_title: "Zugangs-Badge",
+                access_badge_desc: "Der Badge am Schlüsselbund dient für:",
+                badge_item_1: "Nutzung des Aufzugs",
+                badge_item_2: "Zugang zum Skiraum",
+                badge_item_3: "Tür zur Piste im Erdgeschoss",
+                access_ski_title: "Skibox Nr. 31 (Erdgeschoss)",
+                access_ski_desc: "Im Skiraum im Erdgeschoss. Vorhängeschloss Code:",
+                access_ski_dryer: "🔥 <strong>Elektrische Skischuhtrockner inklusive!</strong> Jeden Morgen warme Skischuhe.",
+                checkin_label: "Anreise (Check-in)",
+                checkin_time: "Ab 16:00 Uhr",
+                checkout_label: "Abreise (Check-out)",
+                checkout_time: "Bis 10:00 Uhr",
+                tech_title: "Technischer Leitfaden",
+                tech_subtitle: "Praktische Hinweise für Ihre Wohnung",
+                tech_water_title: "Wasserversorgung (4 Ventile)",
+                tech_water_alert: "ℹ️ Die 4 Ventile sind <strong>normalerweise OFFEN</strong>.",
+                tech_water_kitchen: "<strong>Küche:</strong> Unter der Spüle.",
+                tech_water_bathroom: "<strong>Badezimmer:</strong> Unter dem Waschbecken.",
+                tech_elec_title: "Elektrizität & Heizung",
+                tech_elec_desc: "<strong>Sicherungskasten:</strong> Im Flur.",
+                tech_heating_desc: "<strong>Heizung:</strong> Empfohlene Temperatur 19°C - 20°C.",
+                tech_kitchen_title: "Kaffeemaschine & Ausstattung",
+                tech_coffee_desc: "<strong>Kaffee:</strong> Filterkaffeemaschine (Filter Gr. 4).",
+                tech_fondue_desc: "<strong>Gemütliche Abende:</strong> Fondue-Set und Gesellschaftsspiele vorhanden.",
+                form_tag: "Überprüfung bei Ankunft",
+                form_title: "Ankunfts-Inventar",
+                form_desc: "Erkunden Sie Ihren Kokon Raum für Raum und prüfen Sie, ob alles da ist. Etwas schmutzig oder beschädigt? Melden Sie es mit einem Foto.",
+                explore_tag: "Praktischer Leitfaden",
+                explore_title: "Orientierung & Transport in La Plagne",
+                maps_section: "Karten & Pistenpläne",
+                map_bp: "Belle Plagne Karte (PDF)",
+                map_ski: "Winter Pistenplan",
+                map_hike: "Sommer Wanderkarte",
+                transports_section: "Kostenlose Gondel & Busse",
+                gondola_desc: "<strong>100% Kostenlose</strong> Gondelbahn von 09:00 bis 23:30 Uhr.",
+                shuttle_desc: "Kostenlose Busse zwischen den Ortsteilen.",
+                bookings_section: "Schnellbuchungen",
+                winter_tag: "Winter-Saison",
+                winter_title: "Wintersport direkt vor der Haustür",
+                winter_skitour_desc: "Skitourengehen direkt ab der Haustür zum Col de Forcle.",
+                winter_snowshoe_desc: "Schneeschuhwanderungen durch den Fichtenwald.",
+                winter_luge_desc: "1,5 km Rodelbahn Colorado Park.",
+                winter_bob_desc: "Olympische Bobbahn in La Roche.",
+                summer_tag: "Sommer-Saison",
+                summer_title: "Sommeraktivitäten im Dorf",
+                summer_via_desc: "Klettersteig Via Ferrata des Bourtes (45 Min Fußweg).",
+                summer_lake_desc: "Wanderung zum Lac Vert mit Grillplätzen.",
+                summer_aero_desc: "Aérolive Gondel und Gleitschirmfliegen.",
+                summer_bike_desc: "Bike Park und E-MTB Strecken.",
+                emergency_title: "Geschäfte & Notrufnummern",
+                depart_tag: "Vor Schlüsselrückgabe",
+                depart_title: "Abreise-Checkliste",
+                depart_memory_tag: "24 Std Speicherung",
+                depart_desc: "Haken Sie die Aufgaben ab. Die Eingaben werden 24 Std gespeichert.",
+                chk_1: "Heizung: ALLES AUSGESCHALTET",
+                chk_2: "Müll geleert & in Außencontainer geworfen",
+                chk_3: "Kühlschrank leer & Spülmaschine ausgeräumt",
+                chk_4: "Fenster & Balkontüren verriegelt",
+                chk_5: "Schlüssel & Badge zurück im Schlüsselsafe (Code 2410 verstellt)",
+                review_title: "War Ihr Aufenthalt zauberhaft?",
+                review_desc: "Wenn es Ihnen gefallen hat, freuen wir uns über eine <strong>5-Sterne Bewertung</strong>!",
+                review_issue_title: "Gibt es ein Problem?",
+                review_issue_desc: "Bitte kontaktieren Sie mich direkt, damit ich schnell helfen kann.",
+                btn_contact_direct: "Direkt Kontaktieren"
+            }
+        };
+
+        // Switch Tabs Function
+        function switchTab(tabId) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            
+            // Show current tab content
+            const activeTab = document.getElementById('tab-' + tabId);
+            if (activeTab) activeTab.classList.remove('hidden');
+
+            // Reset desktop navigation styling
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.className = "tab-btn px-4 py-2 rounded-xl transition flex items-center gap-2 text-slate-300 hover:text-white hover:bg-white/10";
+            });
+
+            // Reset mobile navigation styling
+            document.querySelectorAll('.mobile-tab-btn').forEach(btn => {
+                btn.className = "mobile-tab-btn flex flex-col items-center gap-0.5 py-1 px-2 text-slate-300 hover:text-white transition";
+            });
+
+            // Highlight active navigation buttons
+            const activeDesktopBtn = document.getElementById('nav-desktop-' + tabId);
+            if (activeDesktopBtn) {
+                activeDesktopBtn.className = "tab-btn px-4 py-2 rounded-xl transition flex items-center gap-2 bg-amber-500 text-[#1b2b48] shadow-md";
+            }
+
+            const activeMobileBtn = document.getElementById('nav-mobile-' + tabId);
+            if (activeMobileBtn) {
+                activeMobileBtn.className = "mobile-tab-btn flex flex-col items-center gap-0.5 py-1 px-2 text-amber-400 font-bold transition";
+            }
+
+            // Scroll smooth to top of page
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Language Switcher Function
+        function setLanguage(lang) {
+            if (!i18n[lang]) return;
+
+            // Highlight language buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.className = "lang-btn px-2.5 py-1 rounded-lg font-bold transition text-slate-300 hover:bg-white/10";
+            });
+            const activeLangBtn = document.getElementById('lang-' + lang);
+            if (activeLangBtn) {
+                activeLangBtn.className = "lang-btn px-2.5 py-1 rounded-lg font-bold transition bg-amber-500 text-[#1b2b48]";
+            }
+
+            // Translate elements
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (i18n[lang][key]) {
+                    el.innerHTML = i18n[lang][key];
+                }
+            });
+
+            // Store user language preference
+            localStorage.setItem('licorne_lang', lang);
+
+            // Re-render the interactive inventory in the new language
+            if (window.invRender) window.invRender();
+        }
+
+        // Checklist 24H Persistence Script
+        (function() {
+            const STORAGE_KEY = 'licorne416_checklist';
+            const EXPIRATION_TIME = 24 * 60 * 60 * 1000; // 24 Hours in ms
+
+            const checkboxes = document.querySelectorAll('#checklist-container input[type="checkbox"]');
+
+            function loadChecklist() {
+                const storedData = localStorage.getItem(STORAGE_KEY);
+                if (!storedData) return;
+
+                try {
+                    const parsed = JSON.parse(storedData);
+                    const now = new Date().getTime();
+
+                    if (now - parsed.timestamp > EXPIRATION_TIME) {
+                        localStorage.removeItem(STORAGE_KEY);
+                        return;
+                    }
+
+                    checkboxes.forEach(cb => {
+                        if (parsed.states && parsed.states[cb.id] !== undefined) {
+                            cb.checked = parsed.states[cb.id];
+                        }
+                    });
+                } catch(e) {
+                    console.error(e);
+                }
+            }
+
+            function saveChecklist() {
+                const states = {};
+                checkboxes.forEach(cb => {
+                    states[cb.id] = cb.checked;
+                });
+                const dataToSave = {
+                    timestamp: new Date().getTime(),
+                    states: states
+                };
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave));
+            }
+
+            checkboxes.forEach(cb => {
+                cb.addEventListener('change', saveChecklist);
+            });
+
+            loadChecklist();
+
+            // Load saved language if available
+            const savedLang = localStorage.getItem('licorne_lang') || 'fr';
+            setLanguage(savedLang);
+        })();
+    </script>
+    <script src="inventaire.js"></script>
+
+</body>
+</html>
