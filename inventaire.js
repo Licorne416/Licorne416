@@ -6,7 +6,7 @@
     if (!root) return;
 
     const STORAGE_KEY = 'licorne416_inventaire_v1';
-    const REF_CACHE_KEY = 'licorne416_inventaire_ref';
+    const REF_CACHE_KEY = 'licorne416_inventaire_ref_v2';
     const MAX_PHOTO_SIDE = 1600;
 const API_URL = "https://script.google.com/macros/s/AKfycbyMsIkALXAba5BF507T8-jJsPo2aglb4XhAZlZJ7VzCsJDUiJkA_YHhY1sNxv_fkuvr/exec";
     const T = {
@@ -273,11 +273,29 @@ const API_URL = "https://script.google.com/macros/s/AKfycbyMsIkALXAba5BF507T8-jJ
         return isNaN(d) ? iso : d.toLocaleDateString(lang() === 'en' ? 'en-GB' : lang(), { day: 'numeric', month: 'short', year: 'numeric' });
     }
 
-    function roomIcon(name) {
-        const n = name.toLowerCase();
-        const match = ROOM_ICONS.find(([kw]) => n.includes(kw));
-        return match ? match[1] : '📦';
-    }
+function roomName(room) {
+   const l = lang();
+   if (room && room.names && room.names[l]) return room.names[l];
+   return room ? room.name : '';
+ }
+
+ function itemName(item) {
+   const l = lang();
+   if (item && item.names && item.names[l]) return item.names[l];
+   return item ? (item.names && item.names.fr ? item.names.fr : item.name) : '';
+ }
+
+ function itemRoomName(item) {
+   const l = lang();
+   if (item && item.roomNames && item.roomNames[l]) return item.roomNames[l];
+   return item ? item.room : '';
+ }
+
+ function roomIcon(nameOrRoom) {
+   const n = (typeof nameOrRoom === 'object' ? (nameOrRoom.name || '') : String(nameOrRoom || '')).toLowerCase();
+   const match = ROOM_ICONS.find(([kw]) => n.includes(kw));
+   return match ? match[1] : '📦';
+ }
 
     function record(item) {
         return state.items[item.key] || null;
@@ -330,12 +348,12 @@ const API_URL = "https://script.google.com/macros/s/AKfycbyMsIkALXAba5BF507T8-jJ
     }
 
     // ---------- Reference loading ----------
-    function setRooms(list) {
-        rooms = list.filter(r => r.items.length);
-        allItems = [];
-        rooms.forEach(r => r.items.forEach(i => allItems.push(i)));
-        if (state.room >= rooms.length) state.room = 0;
-    }
+function setRooms(list) {
+ rooms = list.filter(r => r.items.length);
+ allItems = [];
+ rooms.forEach(r => r.items.forEach(i => allItems.push(i)));
+ if (state.room >= rooms.length) state.room = 0;
+ }
 
     async function loadReference() {
          loadFailed = false;
@@ -471,7 +489,7 @@ const API_URL = "https://script.google.com/macros/s/AKfycbyMsIkALXAba5BF507T8-jJ
             return `<button type="button" data-action="open-room" data-room="${i}" class="relative text-left p-4 rounded-2xl border ${ring} hover:bg-white/10 active:scale-95 transition space-y-2">
                 ${s.complete ? '<span class="absolute top-2 right-2 text-lg">🏅</span>' : ''}
                 <div class="text-3xl">${roomIcon(room.name)}</div>
-                <p class="font-black text-white text-sm leading-tight">${esc(room.name)}</p>
+                <p class="font-black text-white text-sm leading-tight">${esc(roomName(room))}</p>
                 <p class="text-[11px] font-bold ${s.complete ? 'text-emerald-300' : 'text-amber-300/90'}">
                     ${s.complete ? '✓ ' + t('room_done') : t('room_todo', { n: s.total - s.done })}
                 </p>
@@ -572,7 +590,7 @@ const API_URL = "https://script.google.com/macros/s/AKfycbyMsIkALXAba5BF507T8-jJ
         return `<div id="inv-item-${index}" class="rounded-2xl p-4 border transition ${border}">
             <div class="flex items-start justify-between gap-3">
                 <div class="min-w-0">
-                    <p class="font-bold text-white text-sm leading-snug">${esc(item.name)}</p>
+                    <p class="font-bold text-white text-sm leading-snug">${esc(itemName(item))}</p>
                     <p class="text-[11px] text-slate-400 mt-0.5">${item.mobile ? t('mobile') : t('fixed')} · ${item.expected != null ? t('expected', { n: item.expected }) : t('free_qty')}</p>
                 </div>
                 <span class="text-lg shrink-0 transition ${checked ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}">${damaged ? '📝' : '✅'}</span>
@@ -597,7 +615,7 @@ const API_URL = "https://script.google.com/macros/s/AKfycbyMsIkALXAba5BF507T8-jJ
             <div class="flex items-center gap-3">
                 <span class="text-4xl">${roomIcon(room.name)}</span>
                 <div class="flex-1 min-w-0">
-                    <h4 class="text-lg sm:text-xl font-black text-white uppercase">${esc(room.name)}</h4>
+                    <h4 class="text-lg sm:text-xl font-black text-white uppercase">${esc(roomName(room))}</h4>
                     <p class="text-[11px] font-bold text-amber-300" data-room-progress>${t('progress', { done: s.done, total: s.total })}</p>
                 </div>
                 ${s.complete ? '<span class="text-3xl">🏅</span>' : ''}
@@ -616,7 +634,7 @@ const API_URL = "https://script.google.com/macros/s/AKfycbyMsIkALXAba5BF507T8-jJ
 
     function viewRecap() {
         const g = globalStats();
-        const incomplete = rooms.filter(r => !roomStats(r).complete).map(r => esc(r.name));
+        const incomplete = rooms.filter(r => !roomStats(r).complete).map(r => esc(roomName(r)));
         const anomalies = allItems.filter(item => {
             const r = record(item);
             if (!r || !r.state) return false;
@@ -631,7 +649,7 @@ const API_URL = "https://script.google.com/macros/s/AKfycbyMsIkALXAba5BF507T8-jJ
             if (r.state === 'abime') tags.push(t('st_abime'));
             if ((r.photos || []).length) tags.push(`📸 ${r.photos.length}`);
             return `<li class="flex items-start justify-between gap-3 py-2 border-b border-white/5 last:border-0">
-                <span class="text-white text-xs"><span class="text-slate-400">${esc(item.room)} ·</span> ${esc(item.name)}${r.comment ? `<span class="block text-[11px] text-slate-400 italic">${esc(r.comment)}</span>` : ''}</span>
+               <span class="text-white text-xs"><span class="text-slate-400">${esc(itemRoomName(item))} ·</span> ${esc(itemName(item))}
                 <span class="text-[11px] font-bold text-amber-200 text-right shrink-0">${tags.join(' · ')}</span>
             </li>`;
         }).join('');
