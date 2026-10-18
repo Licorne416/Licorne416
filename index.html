@@ -1391,6 +1391,7 @@
             document.getElementById('access-unlocked').classList.remove('hidden');
             if (boite) document.getElementById('display-code-boite').textContent = boite;
             if (casier) document.getElementById('display-code-casier').textContent = casier;
+            const nomPropre = (nom || '').replace(/(?:^|\s)\S/g, l => l.toUpperCase());
             if (nom) document.getElementById('access-guest-name').textContent = nom;
             localStorage.setItem(VAULT_STORAGE_KEY, JSON.stringify({ nom: nom, boite: boite, casier: casier }));
         }
