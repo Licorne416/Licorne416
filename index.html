@@ -1336,17 +1336,23 @@ function setLanguage(lang) {
             // Load saved language if available
             const savedLang = localStorage.getItem('licorne_lang') || 'fr';
             // Système de déverrouillage sécurisé des codes
+setLanguage(savedLang);
+        })();
+
+        // Système de déverrouillage sécurisé des codes
         const MASTER_CODE = "SECOURS416";
         const VAULT_STORAGE_KEY = "licorne416_vault_unlocked";
 
         window.unlockAccessCodes = async function() {
+            // Lecture de la langue en cours pour afficher les messages
+            const currentLang = localStorage.getItem('licorne_lang') || 'fr';
             const prenom = (document.getElementById('access-input-prenom').value || '').trim();
             const code = (document.getElementById('access-input-code').value || '').trim();
             const errEl = document.getElementById('access-error-msg');
             const btnEl = document.getElementById('access-btn-unlock');
 
             if (!code) {
-                errEl.textContent = i18n[lang() || 'fr'].vault_err_empty || "Merci d'entrer votre code séjour.";
+                errEl.textContent = i18n[currentLang].vault_err_empty || "Merci d'entrer votre code séjour.";
                 errEl.classList.remove('hidden');
                 return;
             }
@@ -1375,11 +1381,11 @@ function setLanguage(lang) {
                 if (data.valid) {
                     applyUnlock(data.nom ? "• " + data.nom : "", data.codes.keybox, data.codes.ski);
                 } else {
-                    errEl.textContent = data.error || (i18n[lang() || 'fr'].vault_err_invalid || "Prénom ou code séjour non reconnu.");
+                    errEl.textContent = data.error || (i18n[currentLang].vault_err_invalid || "Prénom ou code séjour non reconnu.");
                     errEl.classList.remove('hidden');
                 }
             } catch(e) {
-                errEl.textContent = i18n[lang() || 'fr'].vault_err_network || "Connexion impossible. En cas d'urgence, contactez Jérôme.";
+                errEl.textContent = i18n[currentLang].vault_err_network || "Connexion impossible. En cas d'urgence, contactez Jérôme.";
                 errEl.classList.remove('hidden');
             }
 
@@ -1393,8 +1399,8 @@ function setLanguage(lang) {
             if (boite) document.getElementById('display-code-boite').textContent = boite;
             if (casier) document.getElementById('display-code-casier').textContent = casier;
             const nomPropre = (nom || '').replace(/(?:^|\s)\S/g, l => l.toUpperCase());
-            if (nom) document.getElementById('access-guest-name').textContent = nom;
-            localStorage.setItem(VAULT_STORAGE_KEY, JSON.stringify({ nom: nom, boite: boite, casier: casier }));
+            if (nom) document.getElementById('access-guest-name').textContent = nomPropre;
+            localStorage.setItem(VAULT_STORAGE_KEY, JSON.stringify({ nom: nomPropre, boite: boite, casier: casier }));
         }
 
         window.lockAccessCodes = function() {
@@ -1413,8 +1419,7 @@ function setLanguage(lang) {
                 } catch(e) {}
             }
         })();
-            setLanguage(savedLang);
-        })();
+    </script>
     </script>
     <script src="inventaire.js"></script>
 
