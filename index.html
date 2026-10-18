@@ -235,12 +235,36 @@
 
                     
                 <!-- Codes d'accès & Casier -->
+<!-- Codes d'accès & Casier (Sécurisé) -->
                 <div class="glass-card-dark rounded-3xl p-6 sm:p-8 text-white shadow-2xl border border-amber-500/20 space-y-6">
                     <h3 class="text-xl sm:text-2xl font-black flex items-center gap-3 text-amber-400 uppercase tracking-wide border-b border-amber-500/20 pb-4" data-i18n="access_title">
                         🗝️ Accès, Boîte à Clés & Casier
                     </h3>
-                    
-                    <div class="space-y-6">
+
+                    <!-- FORMULAIRE DE DÉVERROUILLAGE -->
+                    <div id="access-locked" class="space-y-4">
+                        <div class="bg-amber-500/10 border border-amber-400/30 p-4 rounded-2xl text-xs sm:text-sm text-amber-200/90 leading-relaxed">
+                            🔒 <span data-i18n="vault_locked_msg">Pour des raisons de sécurité, les codes de la boîte à clés et du casier sont réservés aux voyageurs ayant réservé. Entrez vos identifiants pour les afficher.</span>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <input type="text" id="access-input-prenom" placeholder="Votre prénom" data-i18n-ph="vault_ph_prenom" class="w-full bg-white/95 text-[#1b2b48] font-semibold rounded-2xl px-4 py-3 text-sm border-2 border-transparent focus:border-amber-400 outline-none">
+                            <input type="text" id="access-input-code" placeholder="Code séjour (reçu par message)" data-i18n-ph="vault_ph_code" class="w-full bg-white/95 text-[#1b2b48] font-semibold rounded-2xl px-4 py-3 text-sm border-2 border-transparent focus:border-amber-400 outline-none">
+                        </div>
+                        <p id="access-error-msg" class="text-xs text-red-300 font-bold hidden"></p>
+                        <div class="flex justify-end">
+                            <button type="button" onclick="unlockAccessCodes()" id="access-btn-unlock" class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-[#1b2b48] font-black text-xs sm:text-sm uppercase tracking-wide px-6 py-3 rounded-2xl transition shadow-lg flex items-center gap-2">
+                                <span>🔓</span> <span data-i18n="vault_btn_unlock">Déverrouiller les codes</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- CONTENU DÉVERROUILLÉ (MASQUÉ AU DÉPART) -->
+                    <div id="access-unlocked" class="space-y-6 hidden">
+                        <div class="flex items-center justify-between bg-emerald-500/15 border border-emerald-400/30 px-4 py-2.5 rounded-2xl text-xs text-emerald-200">
+                            <span>✅ <strong data-i18n="vault_unlocked_badge">Accès déverrouillé</strong> <span id="access-guest-name"></span></span>
+                            <button type="button" onclick="lockAccessCodes()" class="text-[11px] underline opacity-80 hover:opacity-100" data-i18n="vault_btn_relock">Verrouiller</button>
+                        </div>
+
                         <!-- Boîte à clés -->
                         <div class="flex items-start gap-4">
                             <div class="bg-amber-500/20 border border-amber-500/40 p-3 rounded-2xl text-2xl shrink-0 text-amber-400">🔑</div>
@@ -248,7 +272,7 @@
                                 <h4 class="font-bold text-lg text-white" data-i18n="access_keybox_title">Boîte à clés (Porte 416)</h4>
                                 <p class="text-slate-300 text-xs sm:text-sm mb-3" data-i18n="access_keybox_desc">Fixée directement sur la porte d'entrée de l'appartement au 4ᵉ étage.</p>
                                 <div class="inline-flex items-center gap-3 bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 px-5 py-2.5 rounded-2xl font-mono text-3xl font-black tracking-widest shadow-lg">
-                                    <span>2410</span>
+                                    <span id="display-code-boite">2410</span>
                                 </div>
                                 <p class="text-xs text-amber-200/80 mt-2" data-i18n="access_keybox_tip">💡 N'oubliez pas de brouiller le code après ouverture.</p>
                             </div>
@@ -277,7 +301,7 @@
                                 <h4 class="font-bold text-lg text-white" data-i18n="access_ski_title">Casier à Skis n°31 (RDC)</h4>
                                 <p class="text-slate-300 text-xs sm:text-sm mb-2" data-i18n="access_ski_desc">Situé dans le local du RDC. Code du cadenas :</p>
                                 <div class="inline-flex items-center gap-3 bg-white/10 border border-white/20 text-white px-5 py-2 rounded-2xl font-mono text-2xl font-extrabold tracking-widest mb-3">
-                                    <span>6416</span>
+                                    <span id="display-code-casier">6416</span>
                                 </div>
                                 <div class="bg-amber-500/10 border border-amber-500/30 p-4 rounded-2xl text-xs sm:text-sm text-amber-200/90 leading-relaxed" data-i18n="access_ski_dryer">
                                     🔥 <strong>Sèche-chaussures électriques inclus !</strong> Profitez des chauffe-chaussures installés dans le casier pour des chaussures bien chaudes chaque matin.
@@ -846,7 +870,16 @@
                 review_desc: "Votre satisfaction est notre priorité. Si vous avez passé un bon moment, un avis <strong>5 étoiles</strong> sur votre plateforme de réservation est la plus belle récompense pour notre cocon d'altitude !",
                 review_issue_title: "Un problème ou un dysfonctionnement ?",
                 review_issue_desc: "Un souci de propreté, une panne ou un oubli ? <strong>Ne restez pas sur une impression négative !</strong> Contactez-moi immédiatement pour me laisser la possibilité d'intervenir rapidement.",
-                btn_contact_direct: "Me Contacter Directement"
+                btn_contact_direct: "Me Contacter Directement",
+                vault_locked_msg: "Pour des raisons de sécurité, les codes de la boîte à clés et du casier sont réservés aux voyageurs ayant réservé. Entrez vos identifiants pour les afficher.",
+                vault_ph_prenom: "Votre prénom",
+                vault_ph_code: "Code séjour (reçu par message)",
+                vault_btn_unlock: "Déverrouiller les codes",
+                vault_unlocked_badge: "Accès déverrouillé",
+                vault_btn_relock: "Verrouiller",
+                vault_err_empty: "Merci d'entrer votre code séjour.",
+                vault_err_invalid: "Prénom ou code séjour non reconnu.",
+                vault_err_network: "Connexion impossible. En cas d'urgence, contactez Jérôme."
             },
             en: {
                 nav_home: "Welcome & Arrival",
@@ -950,7 +983,16 @@
                 review_desc: "Your satisfaction is our priority. If you enjoyed your time, leaving a <strong>5-star review</strong> on your booking platform is the best reward!",
                 review_issue_title: "Any issue or inconvenience?",
                 review_issue_desc: "Cleanliness issue, breakdown, or missing item? <strong>Please don't leave on a bad note!</strong> Contact me immediately so I can fix it for you quickly.",
-                btn_contact_direct: "Contact Me Directly"
+                btn_contact_direct: "Contact Me Directly",
+                vault_locked_msg: "For security reasons, access codes for the key box and ski locker are restricted to confirmed guests. Enter your details to view them.",
+                vault_ph_prenom: "Your first name",
+                vault_ph_code: "Stay code (from your confirmation message)",
+                vault_btn_unlock: "Unlock codes",
+                vault_unlocked_badge: "Access unlocked",
+                vault_btn_relock: "Lock",
+                vault_err_empty: "Please enter your stay code.",
+                vault_err_invalid: "First name or stay code not recognized.",
+                vault_err_network: "Connection error. In case of emergency, contact Jérôme."
             },
             nl: {
                 nav_home: "Welkom & Aankomst",
@@ -1054,7 +1096,16 @@
                 review_desc: "Als u heeft genoten, is een <strong>5-sterren beoordeling</strong> de mooiste beloning!",
                 review_issue_title: "Probleem of opmerking?",
                 review_issue_desc: "Neem direct contact op zodat we het meteen kunnen oplossen.",
-                btn_contact_direct: "Direct Contact Opnemen"
+                btn_contact_direct: "Direct Contact Opnemen",
+                vault_locked_msg: "Om veiligheidsredenen zijn de toegangscodes alleen beschikbaar voor bevestigde gasten. Voer uw gegevens in om ze te bekijken.",
+                vault_ph_prenom: "Uw voornaam",
+                vault_ph_code: "Verblijfscode (uit uw bericht)",
+                vault_btn_unlock: "Codes ontgrendelen",
+                vault_unlocked_badge: "Toegang ontgrendeld",
+                vault_btn_relock: "Vergrendelen",
+                vault_err_empty: "Voer uw verblijfscode in.",
+                vault_err_invalid: "Voornaam of verblijfscode niet herkend.",
+                vault_err_network: "Verbinding mislukt. Neem bij spoed contact op met Jérôme."
             },
             de: {
                 nav_home: "Willkommen & Anreise",
@@ -1158,7 +1209,16 @@
                 review_desc: "Wenn es Ihnen gefallen hat, freuen wir uns über eine <strong>5-Sterne Bewertung</strong>!",
                 review_issue_title: "Gibt es ein Problem?",
                 review_issue_desc: "Bitte kontaktieren Sie mich direkt, damit ich schnell helfen kann.",
-                btn_contact_direct: "Direkt Kontaktieren"
+                btn_contact_direct: "Direkt Kontaktieren",
+                vault_locked_msg: "Aus Sicherheitsgründen sind die Zugangscodes nur für gebuchte Gäste sichtbar. Geben Sie Ihre Daten ein, um sie anzuzeigen.",
+                vault_ph_prenom: "Ihr Vorname",
+                vault_ph_code: "Aufenthaltscode (aus Ihrer Nachricht)",
+                vault_btn_unlock: "Codes freischalten",
+                vault_unlocked_badge: "Zugang freigeschaltet",
+                vault_btn_relock: "Sperren",
+                vault_err_empty: "Bitte geben Sie Ihren Aufenthaltscode ein.",
+                vault_err_invalid: "Vorname oder Aufenthaltscode nicht erkannt.",
+                vault_err_network: "Verbindung fehlgeschlagen. Im Notfall kontaktieren Sie Jérôme."
             }
         };
 
@@ -1210,10 +1270,10 @@
             }
 
             // Translate elements
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
+            document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+                const key = el.getAttribute('data-i18n-ph');
                 if (i18n[lang][key]) {
-                    el.innerHTML = i18n[lang][key];
+                    el.setAttribute('placeholder', i18n[lang][key]);
                 }
             });
 
@@ -1274,6 +1334,83 @@
 
             // Load saved language if available
             const savedLang = localStorage.getItem('licorne_lang') || 'fr';
+            // Système de déverrouillage sécurisé des codes
+        const MASTER_CODE = "SECOURS416";
+        const VAULT_STORAGE_KEY = "licorne416_vault_unlocked";
+
+        window.unlockAccessCodes = async function() {
+            const prenom = (document.getElementById('access-input-prenom').value || '').trim();
+            const code = (document.getElementById('access-input-code').value || '').trim();
+            const errEl = document.getElementById('access-error-msg');
+            const btnEl = document.getElementById('access-btn-unlock');
+
+            if (!code) {
+                errEl.textContent = i18n[lang() || 'fr'].vault_err_empty || "Merci d'entrer votre code séjour.";
+                errEl.classList.remove('hidden');
+                return;
+            }
+
+            errEl.classList.add('hidden');
+            btnEl.disabled = true;
+            btnEl.classList.add('opacity-50');
+
+            // 1. VÉRIFICATION DU CODE SECOURS (FAIL-SAFE)
+            if (code.toUpperCase() === MASTER_CODE) {
+                applyUnlock("Accès direct", "2410", "6416");
+                btnEl.disabled = false;
+                btnEl.classList.remove('opacity-50');
+                return;
+            }
+
+            // 2. VÉRIFICATION AUPRÈS DU GOOGLE SHEET (APPS SCRIPT)
+            try {
+                const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyMsIkALXAba5BF507T8-jJsPo2aglb4XhAZlZJ7VzCsJDUiJkA_YHhY1sNxv_fkuvr/exec";
+                const res = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: "check_access", prenom: prenom, code: code })
+                });
+                const data = await res.json();
+
+                if (data.valid) {
+                    applyUnlock(data.nom ? "• " + data.nom : "", data.codes.keybox, data.codes.ski);
+                } else {
+                    errEl.textContent = data.error || (i18n[lang() || 'fr'].vault_err_invalid || "Prénom ou code séjour non reconnu.");
+                    errEl.classList.remove('hidden');
+                }
+            } catch(e) {
+                errEl.textContent = i18n[lang() || 'fr'].vault_err_network || "Connexion impossible. En cas d'urgence, contactez Jérôme.";
+                errEl.classList.remove('hidden');
+            }
+
+            btnEl.disabled = false;
+            btnEl.classList.remove('opacity-50');
+        };
+
+        function applyUnlock(nom, boite, casier) {
+            document.getElementById('access-locked').classList.add('hidden');
+            document.getElementById('access-unlocked').classList.remove('hidden');
+            if (boite) document.getElementById('display-code-boite').textContent = boite;
+            if (casier) document.getElementById('display-code-casier').textContent = casier;
+            if (nom) document.getElementById('access-guest-name').textContent = nom;
+            localStorage.setItem(VAULT_STORAGE_KEY, JSON.stringify({ nom: nom, boite: boite, casier: casier }));
+        }
+
+        window.lockAccessCodes = function() {
+            localStorage.removeItem(VAULT_STORAGE_KEY);
+            document.getElementById('access-locked').classList.remove('hidden');
+            document.getElementById('access-unlocked').classList.add('hidden');
+        };
+
+        // Restauration de l'état déverrouillé au chargement
+        (function restoreVaultState() {
+            const saved = localStorage.getItem(VAULT_STORAGE_KEY);
+            if (saved) {
+                try {
+                    const data = JSON.parse(saved);
+                    applyUnlock(data.nom, data.boite, data.casier);
+                } catch(e) {}
+            }
+        })();
             setLanguage(savedLang);
         })();
     </script>
