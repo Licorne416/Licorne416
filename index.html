@@ -220,6 +220,18 @@
                     </div>
                 </div>
 
+                <!-- Accessibilité PMR -->
+                 <div class="glass-card-dark rounded-3xl p-6 sm:p-8 text-white shadow-xl border border-amber-500/20 flex items-start gap-4">
+                 <div class="bg-amber-500/20 border border-amber-500/40 p-3 rounded-2xl text-2xl shrink-0 text-amber-400">♿</div>
+                 <div>
+                 <h4 class="font-bold text-lg text-amber-400 mb-1" data-i18n="pmr_title">Accessibilité & Mobilité</h4>
+                 <p class="text-xs sm:text-sm text-slate-300 leading-relaxed" data-i18n="pmr_desc">
+                 Les personnes à mobilité réduite sont les bienvenues à Licorne 416 ! Toutefois, veuillez noter que l'appartement n'est malheureusement pas adapté aux personnes en fauteuil roulant (largeur des passages de porte, baignoire sans barre de maintien).
+                 </p>
+                 </div>
+                 </div>
+
+                    
                 <!-- Codes d'accès & Casier -->
                 <div class="glass-card-dark rounded-3xl p-6 sm:p-8 text-white shadow-2xl border border-amber-500/20 space-y-6">
                     <h3 class="text-xl sm:text-2xl font-black flex items-center gap-3 text-amber-400 uppercase tracking-wide border-b border-amber-500/20 pb-4" data-i18n="access_title">
@@ -338,6 +350,28 @@
                             <p data-i18n="tech_fondue_desc"><strong>Soirées Montagne :</strong> Un appareil à fondue ainsi que des jeux de société sont à votre disposition dans les placards pour passer de superbes soirées.</p>
                         </div>
                     </div>
+
+<!-- Notices & Manuels (PDF) -->
+ <div class="glass-card rounded-3xl border border-amber-900/10 overflow-hidden shadow-lg">
+ <div class="p-5 bg-amber-100/50 border-b border-amber-900/10 font-extrabold text-[#1b2b48] flex items-center gap-2.5 text-base sm:text-lg">
+ <span class="text-xl">📚</span> <span data-i18n="tech_manuals_title">Notices & Manuels d'Utilisation (PDF)</span>
+ </div>
+ <div class="p-5 text-xs sm:text-sm text-slate-700 bg-white/80 grid grid-cols-1 sm:grid-cols-2 gap-3">
+ <a href="#" target="_blank" class="flex items-center gap-2.5 p-3 rounded-xl bg-amber-50/60 hover:bg-amber-100/80 border border-amber-200/60 font-bold text-[#1b2b48] transition">
+ <i class="fas fa-file-pdf text-red-500 text-base"></i> <span data-i18n="doc_tv">Notice Télévision</span>
+ </a>
+ <a href="#" target="_blank" class="flex items-center gap-2.5 p-3 rounded-xl bg-amber-50/60 hover:bg-amber-100/80 border border-amber-200/60 font-bold text-[#1b2b48] transition">
+ <i class="fas fa-file-pdf text-red-500 text-base"></i> <span data-i18n="doc_rad">Notice Radiateurs</span>
+ </a>
+ <a href="#" target="_blank" class="flex items-center gap-2.5 p-3 rounded-xl bg-amber-50/60 hover:bg-amber-100/80 border border-amber-200/60 font-bold text-[#1b2b48] transition">
+ <i class="fas fa-file-pdf text-red-500 text-base"></i> <span data-i18n="doc_caf">Notices Cafetières</span>
+ </a>
+ <a href="#" target="_blank" class="flex items-center gap-2.5 p-3 rounded-xl bg-amber-50/60 hover:bg-amber-100/80 border border-amber-200/60 font-bold text-[#1b2b48] transition">
+ <i class="fas fa-file-pdf text-red-500 text-base"></i> <span data-i18n="doc_lv">Notice Lave-vaisselle</span>
+ </a>
+ </div>
+ </div>
+                    
                 </div>
 
                 <!-- Interactive Arrival Inventory -->
@@ -762,6 +796,13 @@
                 tech_kitchen_title: "Cafetière & Équipements Conviviaux",
                 tech_coffee_desc: "<strong>Cafetière :</strong> Cafetière électrique à filtre traditionnelle (prévoir filtres n°4 et café moulu).",
                 tech_fondue_desc: "<strong>Soirées Montagne :</strong> Un appareil à fondue ainsi que des jeux de société sont à votre disposition dans les placards pour passer de superbes soirées.",
+                pmr_title: "Accessibilité & Mobilité",
+                pmr_desc: "Les personnes à mobilité réduite sont les bienvenues à Licorne 416 ! Toutefois, veuillez noter que l'appartement n'est malheureusement pas adapté aux personnes en fauteuil roulant (largeur des passages de porte, baignoire sans barre de maintien).",
+                tech_manuals_title: "Notices & Manuels d'Utilisation (PDF)",
+                doc_tv: "Notice Télévision",
+                doc_rad: "Notice Radiateurs",
+                doc_caf: "Notices Cafetières",
+                doc_lv: "Notice Lave-vaisselle",
                 form_tag: "Vérification de votre cocon",
                 form_title: "Inventaire d'Arrivée",
                 form_desc: "Partez à la découverte de votre cocon pièce par pièce et vérifiez que tout est bien là. Un équipement sale ou abîmé ? Signalez-le en une photo.",
@@ -856,6 +897,13 @@
                 tech_kitchen_title: "Coffee Maker & Amenities",
                 tech_coffee_desc: "<strong>Coffee Maker:</strong> Traditional filter coffee maker (use #4 paper filters and ground coffee).",
                 tech_fondue_desc: "<strong>Cozy Evenings:</strong> A fondue set and board games are in the cupboards for great evenings with family or friends.",
+                pmr_title: "Accessibility & Mobility",
+                pmr_desc: "Guests with reduced mobility are welcome at Licorne 416! However, please note that the apartment is unfortunately not wheelchair-accessible (door widths, bathtub without grab bars).",
+                tech_manuals_title: "User Manuals & Guides (PDF)",
+                doc_tv: "TV Manual",
+                doc_rad: "Radiator Manual",
+                doc_caf: "Coffee Maker Manuals",
+                doc_lv: "Dishwasher Manual",
                 form_tag: "Check-in verification",
                 form_title: "Arrival Inventory",
                 form_desc: "Explore your cocoon room by room and check everything is there. Something dirty or damaged? Report it with a photo.",
@@ -950,6 +998,13 @@
                 tech_kitchen_title: "Koffiezetapparaat & Voorzieningen",
                 tech_coffee_desc: "<strong>Koffie:</strong> Traditioneel filterkoffiezetapparaat.",
                 tech_fondue_desc: "<strong>Gezellige Avonden:</strong> Fonduestel en gezelschapsspellen aanwezig.",
+                pmr_title: "Toegankelijkheid & Mobiliteit",
+                pmr_desc: "Gasten met beperkte mobiliteit zijn van harte welkom! Houd er echter rekening mee dat het appartement helaas niet rolstoeltoegankelijk is (deurbreedtes, bad zonder handgrepen).",
+                tech_manuals_title: "Handleidingen & Gidsen (PDF)",
+                doc_tv: "Handleiding TV",
+                doc_rad: "Handleiding Verwarming",
+                doc_caf: "Handleiding Koffiezetapparaat",
+                doc_lv: "Handleiding Vaatwasser",
                 form_tag: "Controle bij aankomst",
                 form_title: "Aankomst Inventaris",
                 form_desc: "Ontdek uw cocon kamer per kamer en controleer of alles aanwezig is. Iets vuil of beschadigd? Meld het met een foto.",
@@ -1044,6 +1099,13 @@
                 tech_kitchen_title: "Kaffeemaschine & Ausstattung",
                 tech_coffee_desc: "<strong>Kaffee:</strong> Filterkaffeemaschine (Filter Gr. 4).",
                 tech_fondue_desc: "<strong>Gemütliche Abende:</strong> Fondue-Set und Gesellschaftsspiele vorhanden.",
+                pmr_title: "Barrierefreiheit & Mobilität",
+                pmr_desc: "Gäste mit eingeschränkter Mobilität sind herzlich willkommen! Bitte beachten Sie jedoch, dass die Wohnung leider nicht rollstuhlgerecht ist (Türbreiten, Badewanne ohne Haltegriffe).",
+                tech_manuals_title: "Bedienungsanleitungen (PDF)",
+                doc_tv: "Bedienungsanleitung Fernseher",
+                doc_rad: "Bedienungsanleitung Heizkörper",
+                doc_caf: "Bedienungsanleitung Kaffeemaschine",
+                doc_lv: "Bedienungsanleitung Geschirrspüler",
                 form_tag: "Überprüfung bei Ankunft",
                 form_title: "Ankunfts-Inventar",
                 form_desc: "Erkunden Sie Ihren Kokon Raum für Raum und prüfen Sie, ob alles da ist. Etwas schmutzig oder beschädigt? Melden Sie es mit einem Foto.",
