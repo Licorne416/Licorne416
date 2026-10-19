@@ -404,7 +404,9 @@
           })
         });
         if (!res.ok) throw new Error('HTTP ' + res.status);
-        const { url } = await res.json();
+        const data = await res.json();
+        if (!data.url) throw new Error(data.error || 'no url');
+        const url = data.url;
         const r = record(item);
         updateItem(item, { photos: ((r && r.photos) || []).concat(url) });
       } catch (e) {
