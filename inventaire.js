@@ -410,7 +410,8 @@
         const r = record(item);
         updateItem(item, { photos: ((r && r.photos) || []).concat(url) });
       } catch (e) {
-        photoErrors[item.key] = true;
+                photoErrors[item.key] = true;
+        alert('Détail erreur photo : ' + e.message);
       }
       pendingUploads[item.key]--;
       refreshItem(item);
