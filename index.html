@@ -983,6 +983,9 @@
                 review_desc: "Your satisfaction is our priority. If you enjoyed your time, leaving a <strong>5-star review</strong> on your booking platform is the best reward!",
                 review_issue_title: "Any issue or inconvenience?",
                 review_issue_desc: "Cleanliness issue, breakdown, or missing item? <strong>Please don't leave on a bad note!</strong> Contact me immediately so I can fix it for you quickly.",
+                review_issue_l1: "A cleanliness issue, a breakdown or something missing?",
+                review_issue_l2: "Don't leave with a bad impression!",
+                review_issue_l3: "Contact me right away so I can fix it quickly.",
                 btn_contact_direct: "Contact Me Directly",
                 vault_locked_msg: "For security reasons, access codes for the key box and ski locker are restricted to confirmed guests. Enter your details to view them.",
                 vault_ph_prenom: "Your first name",
@@ -1078,7 +1081,7 @@
                 summer_title: "Zomeractiviteiten in het Dorp",
                 summer_via_desc: "Via Ferrata des Bourtes op 45 min wandelen.",
                 summer_lake_desc: "Wandeling naar Lac Vert met picknick- en BBQ-plaatsen.",
-                summer_aero_desc: "Aérolive kabelbaan en parapludringen.",
+                summer_aero_desc: "Aérolive kabelbaan en parapenten.",
                 summer_bike_desc: "Bike Park en E-mountainbike routes.",
                 emergency_title: "Winkels & Noodnummers",
                 depart_tag: "Vóór sleuteloverdracht",
@@ -1096,6 +1099,9 @@
                 review_desc: "Als u heeft genoten, is een <strong>5-sterren beoordeling</strong> de mooiste beloning!",
                 review_issue_title: "Probleem of opmerking?",
                 review_issue_desc: "Neem direct contact op zodat we het meteen kunnen oplossen.",
+                review_issue_l1: "Een kwestie met de netheid, een defect of iets dat ontbreekt?",
+                review_issue_l2: "Vertrek niet met een slecht gevoel!",
+                review_issue_l3: "Neem direct contact met me op, dan kan ik snel ingrijpen.",
                 btn_contact_direct: "Direct Contact Opnemen",
                 vault_locked_msg: "Om veiligheidsredenen zijn de toegangscodes alleen beschikbaar voor bevestigde gasten. Voer uw gegevens in om ze te bekijken.",
                 vault_ph_prenom: "Uw voornaam",
@@ -1207,6 +1213,9 @@
                 chk_7: "Schlüssel & Badge zurück im Schlüsselsafe (Code verstellt)",
                 review_title: "War Ihr Aufenthalt zauberhaft?",
                 review_desc: "Wenn es Ihnen gefallen hat, freuen wir uns über eine <strong>5-Sterne Bewertung</strong>!",
+                review_issue_l1: "Ein Sauberkeitsproblem, ein Defekt oder etwas vergessen?",
+                review_issue_l2: "Reisen Sie nicht mit einem schlechten Eindruck ab!",
+                review_issue_l3: "Kontaktieren Sie mich sofort, damit ich schnell helfen kann.",
                 review_issue_title: "Gibt es ein Problem?",
                 review_issue_desc: "Bitte kontaktieren Sie mich direkt, damit ich schnell helfen kann.",
                 btn_contact_direct: "Direkt Kontaktieren",
@@ -1281,6 +1290,7 @@ function setLanguage(lang) {
         if (i18n[lang][key]) el.setAttribute('placeholder', i18n[lang][key]);
     });
 
+        document.documentElement.lang = lang;
     localStorage.setItem('licorne_lang', lang);
     if (window.invRender) window.invRender();
 }
@@ -1334,7 +1344,8 @@ function setLanguage(lang) {
             loadChecklist();
 
             // Load saved language if available
-            const savedLang = localStorage.getItem('licorne_lang') || 'fr';
+                        const browserLang = (navigator.language || 'fr').slice(0, 2);
+            const savedLang = localStorage.getItem('licorne_lang') || (i18n[browserLang] ? browserLang : 'fr');
             // Système de déverrouillage sécurisé des codes
 setLanguage(savedLang);
         })();
