@@ -376,27 +376,46 @@
                         </div>
                     </div>
 
-<!-- Notices & Manuels (PDF) -->
- <div class="glass-card rounded-3xl border border-amber-900/10 overflow-hidden shadow-lg">
- <div class="p-5 bg-amber-100/50 border-b border-amber-900/10 font-extrabold text-[#1b2b48] flex items-center gap-2.5 text-base sm:text-lg">
- <span class="text-xl">📚</span> <span data-i18n="tech_manuals_title">Notices & Manuels d'Utilisation (PDF)</span>
- </div>
- <div class="p-5 text-xs sm:text-sm text-slate-700 bg-white/80 grid grid-cols-1 sm:grid-cols-2 gap-3">
- <a href="#" target="_blank" class="flex items-center gap-2.5 p-3 rounded-xl bg-amber-50/60 hover:bg-amber-100/80 border border-amber-200/60 font-bold text-[#1b2b48] transition">
- <i class="fas fa-file-pdf text-red-500 text-base"></i> <span data-i18n="doc_tv">Notice Télévision</span>
- </a>
- <a href="#" target="_blank" class="flex items-center gap-2.5 p-3 rounded-xl bg-amber-50/60 hover:bg-amber-100/80 border border-amber-200/60 font-bold text-[#1b2b48] transition">
- <i class="fas fa-file-pdf text-red-500 text-base"></i> <span data-i18n="doc_rad">Notice Radiateurs</span>
- </a>
- <a href="#" target="_blank" class="flex items-center gap-2.5 p-3 rounded-xl bg-amber-50/60 hover:bg-amber-100/80 border border-amber-200/60 font-bold text-[#1b2b48] transition">
- <i class="fas fa-file-pdf text-red-500 text-base"></i> <span data-i18n="doc_caf">Notices Cafetières</span>
- </a>
- <a href="#" target="_blank" class="flex items-center gap-2.5 p-3 rounded-xl bg-amber-50/60 hover:bg-amber-100/80 border border-amber-200/60 font-bold text-[#1b2b48] transition">
- <i class="fas fa-file-pdf text-red-500 text-base"></i> <span data-i18n="doc_lv">Notice Lave-vaisselle</span>
- </a>
- </div>
- </div>
+
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     
+                    <!-- 1. LAVE-VAISSELLE (ACTIF) -->
+                    <a href="DTLV.pdf" target="_blank" rel="noopener" class="glass-card-dark p-4 rounded-2xl border border-amber-500/20 hover:border-amber-400 transition flex items-center justify-between group">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl p-2 bg-amber-500/20 rounded-xl text-amber-400">🍽️</span>
+                            <div>
+                                <p class="font-bold text-sm text-white group-hover:text-amber-300 transition">Lave-vaisselle</p>
+                                <p class="text-[11px] text-slate-300">Notice technique (PDF)</p>
+                            </div>
+                        </div>
+                        <span class="text-amber-400 text-sm group-hover:translate-x-1 transition">📄</span>
+                    </a>
+
+                    <!-- 2. CAFETIÈRE SENSEO (ACTIF) -->
+                    <a href="DTSenseo.pdf" target="_blank" rel="noopener" class="glass-card-dark p-4 rounded-2xl border border-amber-500/20 hover:border-amber-400 transition flex items-center justify-between group">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl p-2 bg-amber-500/20 rounded-xl text-amber-400">☕</span>
+                            <div>
+                                <p class="font-bold text-sm text-white group-hover:text-amber-300 transition">Cafetière Senseo</p>
+                                <p class="text-[11px] text-slate-300">Notice technique (PDF)</p>
+                            </div>
+                        </div>
+                        <span class="text-amber-400 text-sm group-hover:translate-x-1 transition">📄</span>
+                    </a>
+
+                    <!-- 3. TÉLÉVISION (INACTIF / EN ATTENTE) -->
+                    <div class="glass-card-dark p-4 rounded-2xl border border-white/5 opacity-60 cursor-not-allowed flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl p-2 bg-white/5 rounded-xl text-slate-300">📺</span>
+                            <div>
+                                <p class="font-bold text-sm text-slate-300">Télévision</p>
+                                <p class="text-[11px] text-slate-300">Notice bientôt disponible</p>
+                            </div>
+                        </div>
+                        <span class="text-xs text-slate-300 bg-white/10 px-2 py-1 rounded-md">Bientôt</span>
+                    </div>
+
+                </div>
                 </div>
 
                 <!-- Interactive Arrival Inventory -->
