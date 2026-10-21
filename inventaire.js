@@ -350,20 +350,25 @@
     if (state.room >= rooms.length) state.room = 0;
   }
 
-  async function loadReference() {
+    async function loadReference() {
     loadFailed = false;
+    const cached = localStorage.getItem(REF_CACHE_KEY);
+    if (cached && !rooms) {
+      try { setRooms(JSON.parse(cached)); render(); } catch (e) {}
+    }
     try {
       const res = await fetch(API_URL);
       if (!res.ok) throw new Error('HTTP ' + res.status);
       const data = await res.json();
-      setRooms(data.rooms || []);
-      localStorage.setItem(REF_CACHE_KEY, JSON.stringify(data.rooms || []));
+      const fresh = JSON.stringify(data.rooms || []);
+      if (fresh !== cached) {
+        setRooms(data.rooms || []);
+        localStorage.setItem(REF_CACHE_KEY, fresh);
+        render();
+      }
     } catch (e) {
-      const cached = localStorage.getItem(REF_CACHE_KEY);
-      if (cached) setRooms(JSON.parse(cached));
-      else loadFailed = true;
+      if (!rooms) { loadFailed = true; render(); }
     }
-    render();
   }
 
   async function compressImage(file) {
