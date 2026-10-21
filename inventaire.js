@@ -638,7 +638,7 @@
       const r = record(item);
       const qty = currentQty(item);
       const tags = [];
-      if (item.mobile && item.expected != null && qty < item.expected) tags.push(`⚠️ ${t('missing', { n: item.expected - qty })}`);
+      if (item.mobile && item.expected != null && qty != null && qty < item.expected) tags.push(`⚠️ ${t('missing', { n: item.expected - qty })}`);
       if (r.state === 'sale') tags.push(t('st_sale'));
       if (r.state === 'abime') tags.push(t('st_abime'));
       if ((r.photos || []).length) tags.push(`📸 ${r.photos.length}`);
