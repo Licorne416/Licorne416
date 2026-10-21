@@ -425,6 +425,7 @@
                     </p>
 
                     <div id="inventaire-app" class="scroll-mt-24"></div>
+                                        <p class="text-xs text-slate-400 leading-relaxed" data-i18n="privacy_note">🔒 Vos nom, dates et photos servent uniquement à l'état des lieux de l'appartement. Pour les faire effacer, contactez Jérôme.</p>
                 </div>
 
             </div>
@@ -911,7 +912,8 @@
                 p3_shop_pharmacie: "• <strong>Pharmacie :</strong> <a href='tel:0479090481' class='text-amber-400 underline'>04 79 09 04 81</a>",
                 p3_shop_supermarches: "• <strong>Supermarchés :</strong> Sherpa (Haut) & Spar (Bas)",
                 p3_shop_medecin: "• <strong>Cabinet Médical :</strong> <a href='tel:0479090466' class='text-amber-400 underline'>04 79 09 04 66</a>",
-                p3_shop_secours: "• <strong>Secours Pistes :</strong> <a href='tel:0479096705' class='text-amber-400 underline'>04 79 09 67 05</a> | <strong>Urgences :</strong> 112"
+                p3_shop_secours: "• <strong>Secours Pistes :</strong> <a href='tel:0479096705' class='text-amber-400 underline'>04 79 09 67 05</a> | <strong>Urgences :</strong> 112",
+                privacy_note: "🔒 Vos nom, dates et photos servent uniquement à l'état des lieux de l'appartement. Pour les faire effacer, contactez Jérôme."
             },
             en: {
                 doc_dw_title: "Dishwasher",
@@ -1081,7 +1083,8 @@
                 p3_shop_pharmacie: "• <strong>Pharmacy:</strong> <a href='tel:0479090481' class='text-amber-400 underline'>04 79 09 04 81</a>",
                 p3_shop_supermarches: "• <strong>Supermarkets:</strong> Sherpa (Upper) & Spar (Lower)",
                 p3_shop_medecin: "• <strong>Medical Center:</strong> <a href='tel:0479090466' class='text-amber-400 underline'>04 79 09 04 66</a>",
-                p3_shop_secours: "• <strong>Ski Patrol:</strong> <a href='tel:0479096705' class='text-amber-400 underline'>04 79 09 67 05</a> | <strong>Emergency:</strong> 112"
+                p3_shop_secours: "• <strong>Ski Patrol:</strong> <a href='tel:0479096705' class='text-amber-400 underline'>04 79 09 67 05</a> | <strong>Emergency:</strong> 112",
+                privacy_note: "🔒 Your name, dates and photos are used only for the apartment check-in inventory. To have them deleted, contact Jérôme.",
 
                 
             },
@@ -1254,6 +1257,7 @@
                 p3_shop_supermarches: "• <strong>Supermarkten:</strong> Sherpa (boven) & Spar (beneden)",
                 p3_shop_medecin: "• <strong>Huisartsenpost:</strong> <a href='tel:0479090466' class='text-amber-400 underline'>04 79 09 04 66</a>",
                 p3_shop_secours: "• <strong>Pisteredding:</strong> <a href='tel:0479096705' class='text-amber-400 underline'>04 79 09 67 05</a> | <strong>Noodnummer:</strong> 112",
+                privacy_note: "🔒 Uw naam, data en foto's worden alleen gebruikt voor de inventaris van het appartement. Neem contact op met Jérôme om ze te laten wissen."
             },
             de: {
                 doc_dw_title: "Geschirrspüler",
@@ -1424,11 +1428,14 @@
                 p3_shop_supermarches: "• <strong>Supermärkte:</strong> Sherpa (oben) & Spar (unten)",
                 p3_shop_medecin: "• <strong>Arztpraxis:</strong> <a href='tel:0479090466' class='text-amber-400 underline'>04 79 09 04 66</a>",
                 p3_shop_secours: "• <strong>Pistenrettung:</strong> <a href='tel:0479096705' class='text-amber-400 underline'>04 79 09 67 05</a> | <strong>Notruf:</strong> 112",
+                privacy_note: "🔒 Ihr Name, Ihre Daten und Fotos dienen ausschließlich dem Inventar der Wohnung. Zum Löschen wenden Sie sich an Jérôme."
             }
         };
 
         // Switch Tabs Function
-        function switchTab(tabId) {
+        const VALID_TABS = ['accueil', 'logement', 'decouvrir', 'depart'];
+
+        function switchTab(tabId, fromHistory) {
             // Hide all tab contents
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             
@@ -1459,7 +1466,24 @@
 
             // Scroll smooth to top of page
             window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Mémorise l'onglet dans l'URL (bouton retour + QR codes)
+            if (!fromHistory && location.hash !== '#' + tabId) {
+                history.pushState({ tab: tabId }, '', '#' + tabId);
+            }
         }
+
+        // Bouton retour / avancer du navigateur
+        window.addEventListener('popstate', () => {
+            const id = location.hash.slice(1);
+            switchTab(VALID_TABS.includes(id) ? id : 'accueil', true);
+        });
+
+        // Ouvre directement l'onglet demandé dans l'URL (ex. …/#depart)
+        (function openTabFromUrl() {
+            const id = location.hash.slice(1);
+            if (VALID_TABS.includes(id)) switchTab(id, true);
+        })();
 
         // Language Switcher Function
 function setLanguage(lang) {
