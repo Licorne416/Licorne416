@@ -42,6 +42,7 @@
       st_ok: "✅ OK", st_sale: "🧽 Sale", st_abime: "💔 Abîmé",
       photo_prompt: "📸 Une petite photo nous aide beaucoup !",
       add_photo: "Ajouter une photo",
+      qty_minus: "Retirer un", qty_plus: "Ajouter un",
       uploading: "Envoi de la photo…",
       photo_error: "La photo n'a pas pu être envoyée. Réessayez.",
       comment_ph: "Précisez si besoin (ex : 2 assiettes ébréchées)",
@@ -92,6 +93,7 @@
       st_ok: "✅ OK", st_sale: "🧽 Dirty", st_abime: "💔 Damaged",
       photo_prompt: "📸 A quick photo really helps!",
       add_photo: "Add a photo",
+      qty_minus: "Remove one", qty_plus: "Add one",
       uploading: "Uploading photo…",
       photo_error: "The photo couldn't be sent. Please try again.",
       comment_ph: "Add details if needed (e.g. 2 chipped plates)",
@@ -142,6 +144,7 @@
       st_ok: "✅ OK", st_sale: "🧽 Vuil", st_abime: "💔 Beschadigd",
       photo_prompt: "📸 Een foto helpt ons enorm!",
       add_photo: "Foto toevoegen",
+      qty_minus: "Eén minder", qty_plus: "Eén meer",
       uploading: "Foto uploaden…",
       photo_error: "De foto kon niet worden verzonden.",
       comment_ph: "Details indien nodig",
@@ -192,6 +195,7 @@
       st_ok: "✅ OK", st_sale: "🧽 Schmutzig", st_abime: "💔 Beschädigt",
       photo_prompt: "📸 Ein kurzes Foto hilft uns sehr!",
       add_photo: "Foto hinzufügen",
+      qty_minus: "Eins weniger", qty_plus: "Eins mehr",
       uploading: "Foto wird hochgeladen…",
       photo_error: "Das Foto konnte nicht gesendet werden.",
       comment_ph: "Details bei Bedarf",
@@ -551,9 +555,9 @@
       }
       qtyBlock = `<div class="flex items-center gap-2 flex-wrap mt-3">
         <div class="flex items-center bg-white/10 rounded-xl overflow-hidden border border-white/15">
-          <button type="button" data-action="qty-minus" data-i="${index}" class="w-10 h-10 text-lg font-black text-white hover:bg-white/10 active:bg-white/20">−</button>
-          <input type="number" inputmode="numeric" min="0" data-qty="${index}" value="${qty == null ? '' : qty}" placeholder="?" class="w-14 h-10 bg-transparent text-center text-white font-black text-base outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none">
-          <button type="button" data-action="qty-plus" data-i="${index}" class="w-10 h-10 text-lg font-black text-white hover:bg-white/10 active:bg-white/20">+</button>
+          <button type="button" data-action="qty-minus" data-i="${index}" aria-label="${esc(t('qty_minus'))}" class="w-10 h-10 text-lg font-black text-white hover:bg-white/10 active:bg-white/20">−</button>
+          <input type="number" inputmode="numeric" min="0" data-qty="${index}" aria-label="${esc(itemName(item))}" value="${qty == null ? '' : qty}" placeholder="?" class="w-14 h-10 bg-transparent text-center text-white font-black text-base outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none">
+          <button type="button" data-action="qty-plus" data-i="${index}" aria-label="${esc(t('qty_plus'))}" class="w-10 h-10 text-lg font-black text-white hover:bg-white/10 active:bg-white/20">+</button>
         </div>
         ${item.expected != null && qty !== item.expected ? `<button type="button" data-action="qty-all" data-i="${index}" class="text-[11px] font-bold text-emerald-300 bg-emerald-500/10 hover:bg-emerald-500/20 px-2.5 py-2 rounded-lg border border-emerald-400/30">👌 ${t('all_there')}</button>` : ''}
         ${delta}
