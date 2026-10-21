@@ -360,7 +360,8 @@
       const res = await fetch(API_URL);
       if (!res.ok) throw new Error('HTTP ' + res.status);
       const data = await res.json();
-      const fresh = JSON.stringify(data.rooms || []);
+      if (!Array.isArray(data.rooms)) throw new Error(data.error || 'no rooms');
+      const fresh = JSON.stringify(data.rooms);
       if (fresh !== cached) {
         setRooms(data.rooms || []);
         localStorage.setItem(REF_CACHE_KEY, fresh);
