@@ -465,15 +465,12 @@
         <h4 class="text-lg sm:text-xl font-black text-amber-300">🕵️ ${t('id_title')}</h4>
         <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">${t('id_intro')}</p>
       </div>
+
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <label class="space-y-1.5 block"><span class="text-[11px] font-bold text-slate-300 uppercase tracking-wide">${t('prenom')}</span>
         <input type="text" data-field="prenom" autocomplete="given-name" value="${esc(state.prenom)}" class="${INPUT}"></label>
-        <label class="space-y-1.5 block"><span class="text-[11px] font-bold text-slate-300 uppercase tracking-wide">${t('nom')}</span>
-        <input type="text" data-field="nom" autocomplete="family-name" value="${esc(state.nom)}" class="${INPUT}"></label>
         <label class="space-y-1.5 block"><span class="text-[11px] font-bold text-slate-300 uppercase tracking-wide">📅 ${t('arrivee')}</span>
         <input type="date" data-field="arrivee" value="${esc(state.arrivee)}" class="${INPUT}"></label>
-        <label class="space-y-1.5 block"><span class="text-[11px] font-bold text-slate-300 uppercase tracking-wide">📅 ${t('depart')}</span>
-        <input type="date" data-field="depart" value="${esc(state.depart)}" class="${INPUT}"></label>
       </div>
       ${formError ? `<p class="text-xs text-red-300 font-bold">${formError}</p>` : ''}
       <div class="flex justify-end">
@@ -665,8 +662,8 @@
       <button type="button" data-action="rooms" class="${BTN_GHOST}">${t('back')}</button>
       <h4 class="text-lg sm:text-xl font-black text-amber-300">🧾 ${t('recap_title')}</h4>
       <div class="bg-white/5 border border-white/10 rounded-2xl p-4 text-xs text-slate-200 space-y-1">
-        <p><strong class="text-amber-300">${esc(state.prenom)} ${esc(state.nom)}</strong></p>
-        <p>📅 ${esc(fmtDate(state.arrivee))} → ${esc(fmtDate(state.depart))}</p>
+        <p><strong class="text-amber-300">${esc(state.prenom)}</strong></p>
+        <p>📅 Arrivée : ${esc(fmtDate(state.arrivee))}</p>
       </div>
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
         ${stat(`${g.checked}/${g.total}`, t('recap_checked'), 'text-emerald-300')}
@@ -736,17 +733,15 @@
   }
 
   function startInventory() {
-    ['prenom', 'nom', 'arrivee', 'depart'].forEach(f => {
+    ['prenom', 'arrivee'].forEach(f => {
       const el = root.querySelector(`[data-field="${f}"]`);
       if (el) state[f] = el.value.trim();
     });
+    state.nom = '';
+    state.depart = '';
     save();
-    if (!state.prenom || !state.nom || !state.arrivee || !state.depart) {
+    if (!state.prenom || !state.arrivee) {
       formError = t('id_error');
-      return render();
-    }
-    if (state.depart < state.arrivee) {
-      formError = t('date_error');
       return render();
     }
     go('rooms');
