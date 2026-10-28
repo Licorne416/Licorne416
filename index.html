@@ -402,7 +402,7 @@
                         </div>
                         <div class="p-5 text-xs sm:text-sm text-slate-700 space-y-3 bg-white/80">
                             <p data-i18n="tech_elec_desc"><strong>Compteur Électrique :</strong> Situé dans le couloir d'entrée. L'électricité est activée. En cas de disjonction, réenclenchez le <strong>bouton principal tout en bas</strong> du tableau.</p>
-                            <p data-i18n="tech_heating_desc"><strong>Chauffage :</strong> Température conseillée entre 19°C et 20°C. Pensez à baisser les radiateurs lorsque vous aérez l'appartement.</p>
+                            <p data-i18n="tech_heating_desc"><strong>Chauffage :</strong> Température conseillée entre 19°C et 20°C. Pensez à baisser les radiateurs lorsque vous aérez l'appartement, et à <strong>tous les éteindre lors de votre départ</strong>.</p>.</p>
                         </div>
                     </div>
 
@@ -413,7 +413,7 @@
                         </div>
                         <div class="p-5 text-xs sm:text-sm text-slate-700 space-y-2 bg-white/80">
                             <p data-i18n="tech_coffee_desc"><strong>Cafetières :</strong> Cafetière à dosettes Senseo + cafetière électrique à filtre traditionnelle (filtres n°4).</p>
-                            <p data-i18n="tech_fondue_desc"><strong>Soirées Montagne :</strong> Un appareil à fondue, un appareil à raclette ainsi que des jeux de société sont à votre disposition dans les placards pour passer de superbes soirées.</p>
+                            <p data-i18n="tech_fondue_desc"><strong>Soirées Montagne :</strong> Un appareil à fondue, un appareil à raclette ainsi que des jeux de société sont à votre disposition pour passer de superbes soirées.</p>
                         </div>
                     </div>
 
@@ -796,6 +796,12 @@
         // Multi-language Dictionaries
         const i18n = {
             fr: {
+                concierge_desc: "<p class='font-bold mb-1.5'>Prestations optionnelles (commander 15j avant) :</p><p>• Kit draps 1 pers : 25€ | 2 pers : 35€</p><p>• Kit démarrage (16€) : papier toilette, liq. vaisselle, pastilles lave-vaisselle, sopalin, torchon.</p>",
+                contact_urgent_title: "Urgences Locales & Médicales",
+                contact_urgent_secours: "• <strong>Secours sur Pistes :</strong> <a href='tel:0479096705' class='font-bold text-red-600 underline'>04 79 09 67 05</a>",
+                contact_urgent_112: "• <strong>Urgence Générale :</strong> <a href='tel:112' class='font-bold text-red-600 underline'>112</a>",
+                contact_urgent_doc: "• <strong>Cabinet Médical (Belle Plagne) :</strong> <a href='tel:0479090466' class='font-bold underline'>04 79 09 04 66</a>",
+                contact_urgent_pharma: "• <strong>Pharmacie (Plagne Centre) :</strong> <a href='tel:0479090481' class='font-bold underline'>04 79 09 04 81</a>",                
                 life_title: "Vie pratique & Règles de la maison",
                 life_wifi: "<strong>Wi-Fi :</strong> il n'y a pas de Wi-Fi dans l'appartement. La réception 4G/5G est très bonne.",
                 life_calm: "<strong>Calme :</strong> pas de fêtes ni de bruit, merci de respecter la tranquillité des voisins, de jour comme de nuit.",
@@ -805,7 +811,6 @@
                 life_trash_plan: "Voir le plan des points de collecte",
                 vault_help: "Le code ne fonctionne pas ou vous ne l'avez pas reçu ?",
                 vault_help_call: "📞 Appeler Jérôme",
-                concierge_desc: "Draps et serviettes : location possible sur demande.",
                 doc_dw_title: "Lave-vaisselle",
                 doc_coffee_title: "Cafetière Senseo",
                 doc_tv_title: "Télévision",
@@ -861,10 +866,10 @@
                 tech_water_bathroom: "<strong>Salle de Bains (2 vannes) :</strong> Situées sous le meuble de la SDB, accessibles par une ouverture en bas à gauche au fond du meuble.",
                 tech_elec_title: "Électricité & Chauffage",
                 tech_elec_desc: "<strong>Compteur Électrique :</strong> Situé dans le couloir d'entrée. L'électricité est activée. En cas de disjonction, réenclenchez le <strong>bouton principal tout en bas</strong> du tableau.",
-                tech_heating_desc: "<strong>Chauffage :</strong> Température conseillée entre 19°C et 20°C. Pensez à baisser les radiateurs lorsque vous aérez l'appartement.",
+                tech_heating_desc: "<strong>Chauffage :</strong> Température conseillée entre 19°C et 20°C. Pensez à baisser les radiateurs lorsque vous aérez l'appartement, et à <strong>tous les éteindre lors de votre départ</strong>.",
+                tech_fondue_desc: "<strong>Soirées Montagne :</strong> Un appareil à fondue, un appareil à raclette ainsi que des jeux de société sont à votre disposition pour passer de superbes soirées.",
                 tech_kitchen_title: "Cafetière & Équipements Conviviaux",
                 tech_coffee_desc: "<strong>Cafetière :</strong> Cafetière à dosettes Senseo + cafetière électrique à filtre traditionnelle (filtres n°4).",
-                tech_fondue_desc: "<strong>Soirées Montagne :</strong> Un appareil à fondue, un appareil à raclette ainsi que des jeux de société sont à votre disposition dans les placards pour passer de superbes soirées.",
                 pmr_title: "Accessibilité & Mobilité",
                 pmr_desc: "Les personnes à mobilité réduite sont les bienvenues à Licorne 416 ! Toutefois, veuillez noter que l'appartement n'est malheureusement pas adapté aux personnes en fauteuil roulant (largeur des passages de porte, baignoire sans barre de maintien).",
                 tech_manuals_title: "Notices & Manuels d'Utilisation (PDF)",
@@ -908,7 +913,7 @@
                 chk_4: "Frigo vide & propre, Lave-vaisselle vidé et rangé",
                 chk_5: "Fenêtres & Baie vitrée soigneusement verrouillées",
                 chk_6: "Couettes et oreillers soigneusement rangés dans l'armoire",
-                chk_7: "Clés & Badge remis dans la boîte à clés (Code brouillé)",
+                chk_7: "Clés & Badge (1 jeu) remis dans la boîte (code brouillé) / 1 jeu restitué à l'agence (si option prise).",
                 review_title: "Votre séjour a été magique ?",
                 review_desc: "Votre satisfaction est notre priorité. Si vous avez passé un bon moment, un avis <strong>5 étoiles</strong> sur votre plateforme de réservation est la plus belle récompense pour notre cocon d'altitude !",
                 review_issue_title: "Un problème ou un dysfonctionnement ?",
@@ -974,6 +979,11 @@
                 privacy_note: "🔒 Vos nom, dates et photos servent uniquement à l'état des lieux de l'appartement. Pour les faire effacer, contactez Jérôme."
             },
             en: {
+                contact_urgent_title: "Local & Medical Emergencies",
+                contact_urgent_secours: "• <strong>Ski Patrol / Rescue :</strong> <a href='tel:0479096705' class='font-bold text-red-600 underline'>04 79 09 67 05</a>",
+                contact_urgent_112: "• <strong>General Emergency :</strong> <a href='tel:112' class='font-bold text-red-600 underline'>112</a>",
+                contact_urgent_doc: "• <strong>Medical Center (Belle Plagne) :</strong> <a href='tel:0479090466' class='font-bold underline'>04 79 09 04 66</a>",
+                contact_urgent_pharma: "• <strong>Pharmacy (Plagne Centre) :</strong> <a href='tel:0479090481' class='font-bold underline'>04 79 09 04 81</a>",
                 life_title: "Practical Life & House Rules",
                 life_wifi: "<strong>Wi-Fi:</strong> there is no Wi-Fi in the apartment. 4G/5G reception is very good.",
                 life_calm: "<strong>Quiet:</strong> no parties and no noise, please. Respect your neighbours' peace and quiet, day and night.",
@@ -983,7 +993,7 @@
                 life_trash_plan: "View the waste collection plan",
                 vault_help: "Code not working, or didn't receive it?",
                 vault_help_call: "📞 Call Jérôme",
-                concierge_desc: "Sheets and towels: available for hire on request.",
+                concierge_desc: "<p class='font-bold mb-1.5'>Optional services (book 15 days ahead):</p><p>• Bed linen 1 pers: €25 | 2 pers: €35</p><p>• Starter kit (€16): toilet paper, dish soap, dishwasher tabs, paper towel, tea towel.</p>",
                 doc_dw_title: "Dishwasher",
                 doc_coffee_title: "Senseo Coffee Maker",
                 doc_tv_title: "Television",
@@ -1039,9 +1049,9 @@
                 tech_water_bathroom: "<strong>Bathroom (2 valves):</strong> Located under the bathroom vanity, accessible through a bottom-left opening.",
                 tech_elec_title: "Electricity & Heating",
                 tech_elec_desc: "<strong>Electric Panel:</strong> Located in the entry hallway. In case of trip, reset the <strong>main bottom switch</strong>.",
-                tech_heating_desc: "<strong>Heating:</strong> Recommended temperature between 19°C and 20°C. Please turn down radiators when airing out the apartment.",
+                tech_heating_desc: "<strong>Heating:</strong> Recommended temperature between 19°C and 20°C. Turn down radiators when airing the flat, and <strong>turn them all off upon departure</strong>.",
+                tech_fondue_desc: "<strong>Cozy Evenings:</strong> A fondue set, a raclette grill, and board games are available for your use to enjoy some wonderful evenings.",
                 tech_kitchen_title: "Coffee Maker & Amenities",
-                tech_coffee_desc: "<strong>Coffee Maker:</strong> Senseo pod coffee machine + traditional electric drip coffee maker (size 4 filters).",
                 tech_fondue_desc: "<strong>Cozy Evenings:</strong> A fondue set, a raclette grill, and board games are available for your use in the cupboards, perfect for enjoying some wonderful evenings.",
                 pmr_title: "Accessibility & Mobility",
                 pmr_desc: "Guests with reduced mobility are welcome at Licorne 416! However, please note that the apartment is unfortunately not wheelchair-accessible (door widths, bathtub without grab bars).",
@@ -1086,7 +1096,7 @@
                 chk_4: "Fridge empty & clean, Dishwasher emptied and put away",
                 chk_5: "Windows & balcony doors carefully locked",
                 chk_6: "Duvets and pillows carefully stored in the wardrobe",
-                chk_7: "Keys & Badge put back in key box (Code scrambled)",
+                chk_7: "Keys & Badge (1 set) left in the key box (scrambled) / 1 set returned to agency (if hired).",
                 review_title: "Was your stay magical?",
                 review_desc: "Your satisfaction is our priority. If you enjoyed your time, leaving a <strong>5-star review</strong> on your booking platform is the best reward!",
                 review_issue_title: "Any issue or inconvenience?",
@@ -1157,6 +1167,11 @@
                 
             },
             nl: {
+                contact_urgent_title: "Lokale & Medische Noodgevallen",
+                contact_urgent_secours: "• <strong>Pisteredding :</strong> <a href='tel:0479096705' class='font-bold text-red-600 underline'>04 79 09 67 05</a>",
+                contact_urgent_112: "• <strong>Algemeen Noodnummer :</strong> <a href='tel:112' class='font-bold text-red-600 underline'>112</a>",
+                contact_urgent_doc: "• <strong>Medisch Centrum (Belle Plagne) :</strong> <a href='tel:0479090466' class='font-bold underline'>04 79 09 04 66</a>",
+                contact_urgent_pharma: "• <strong>Apotheek (Plagne Centre) :</strong> <a href='tel:0479090481' class='font-bold underline'>04 79 09 04 81</a>",
                 life_title: "Praktisch & Huisregels",
                 life_wifi: "<strong>Wifi:</strong> er is geen wifi in het appartement. De 4G/5G-ontvangst is heel goed.",
                 life_calm: "<strong>Rust:</strong> geen feestjes en geen lawaai, graag. Respecteer de rust van de buren, overdag en 's nachts.",
@@ -1166,7 +1181,7 @@
                 life_trash_plan: "Bekijk het plan van de afvalpunten",
                 vault_help: "Werkt de code niet of heeft u hem niet ontvangen?",
                 vault_help_call: "📞 Bel Jérôme",
-                concierge_desc: "Lakens en handdoeken: te huur op aanvraag.",
+                concierge_desc: "<p class='font-bold mb-1.5'>Optionele diensten (15 dagen vooraf):</p><p>• Lakenpakket 1 pers: €25 | 2 pers: €35</p><p>• Startpakket (€16): toiletpapier, afwasmiddel, vaatwastabletten, keukenrol, theedoek.</p>",
                 doc_dw_title: "Vaatwasser",
                 doc_coffee_title: "Senseo Koffiezetapparaat",
                 doc_tv_title: "Televisie",
@@ -1222,7 +1237,8 @@
                 tech_water_bathroom: "<strong>Badkamer:</strong> Onder het badkamermeubel.",
                 tech_elec_title: "Elektriciteit & Verwarming",
                 tech_elec_desc: "<strong>Elektriciteitskast:</strong> In de hal.",
-                tech_heating_desc: "<strong>Verwarming:</strong> Aanbevolen temperatuur 19°C - 20°C.",
+                tech_heating_desc: "<strong>Verwarming:</strong> Aanbevolen temperatuur 19°C - 20°C. Zet de radiatoren lager als u de ramen opent, en <strong>schakel ze allemaal uit bij vertrek</strong>.",
+                tech_fondue_desc: "<strong>Gezellige Avonden:</strong> Een fondueset, een raclettegrill en bordspellen staan tot uw beschikking voor geweldige avonden.",
                 tech_kitchen_title: "Koffiezetapparaat & Voorzieningen",
                 tech_coffee_desc: "<strong>Koffie:</strong> Senseo-koffiepadmachine + traditioneel elektrisch koffiezetapparaat (voor filters van maat 4).",
                 tech_fondue_desc: "<strong>Gezellige Avonden:</strong> In de kasten vind je een fondueset, een raclettegrill en bordspellen die je kunt gebruiken – ideaal voor het beleven van heerlijke avonden.",
@@ -1269,7 +1285,7 @@
                 chk_4: "Koelkast leeg & vaatwasser opgeruimd",
                 chk_5: "Ramen & deuren goed vergrendeld",
                 chk_6: "Dekbedden en kussens opgeborgen in de kast",
-                chk_7: "Sleutels & Badge terug in sleutelkluis (Code verdraaid)",
+                chk_7: "Sleutels & Badge (1 set) in de sleutelkluis (code gewijzigd) / 1 set terug naar agentschap (indien gehuurd).",
                 review_title: "Was uw verblijf fantastisch?",
                 review_desc: "Als u heeft genoten, is een <strong>5-sterren beoordeling</strong> de mooiste beloning!",
                 review_issue_title: "Probleem of opmerking?",
@@ -1338,6 +1354,18 @@
                 privacy_note: "🔒 Uw naam, data en foto's worden alleen gebruikt voor de inventaris van het appartement. Neem contact op met Jérôme om ze te laten wissen."
             },
             de: {
+
+
+
+                contact_urgent_title: "Lokale & Medizinische Notfälle",
+                contact_urgent_secours: "• <strong>Pistenrettung :</strong> <a href='tel:0479096705' class='font-bold text-red-600 underline'>04 79 09 67 05</a>",
+                contact_urgent_112: "• <strong>Allgemeiner Notruf :</strong> <a href='tel:112' class='font-bold text-red-600 underline'>112</a>",
+                contact_urgent_doc: "• <strong>Arztpraxis (Belle Plagne) :</strong> <a href='tel:0479090466' class='font-bold underline'>04 79 09 04 66</a>",
+                contact_urgent_pharma: "• <strong>Apotheke (Plagne Centre) :</strong> <a href='tel:0479090481' class='font-bold underline'>04 79 09 04 81</a>",
+                
+
+
+                
                 life_title: "Praktisches & Hausordnung",
                 life_wifi: "<strong>WLAN:</strong> In der Wohnung gibt es kein WLAN. Der 4G/5G-Empfang ist sehr gut.",
                 life_calm: "<strong>Ruhe:</strong> Bitte keine Partys und keinen Lärm. Respektieren Sie die Ruhe der Nachbarn, tagsüber und nachts.",
@@ -1347,7 +1375,7 @@
                 life_trash_plan: "Plan der Müllsammelstellen ansehen",
                 vault_help: "Code funktioniert nicht oder nicht erhalten?",
                 vault_help_call: "📞 Jérôme anrufen",
-                concierge_desc: "Bettwäsche und Handtücher: auf Anfrage zu mieten.",
+                concierge_desc: "<p class='font-bold mb-1.5'>Optionale Leistungen (15 Tage vorher buchen):</p><p>• Bettwäsche 1 Pers: 25€ | 2 Pers: 35€</p><p>• Starterpaket (16€): Toilettenpapier, Spülmittel, Spülmaschinentabs, Küchenrolle, Geschirrtuch.</p>",
                 doc_dw_title: "Geschirrspüler",
                 doc_coffee_title: "Senseo Kaffeemaschine",
                 doc_tv_title: "Fernseher",
@@ -1403,10 +1431,10 @@
                 tech_water_bathroom: "<strong>Badezimmer:</strong> Unter dem Waschbecken.",
                 tech_elec_title: "Elektrizität & Heizung",
                 tech_elec_desc: "<strong>Sicherungskasten:</strong> Im Flur.",
-                tech_heating_desc: "<strong>Heizung:</strong> Empfohlene Temperatur 19°C - 20°C.",
+                tech_heating_desc: "<strong>Heizung:</strong> Empfohlene Temperatur 19°C - 20°C. Bitte drehen Sie die Heizung beim Lüften herunter und <strong>schalten Sie alle Heizkörper bei Abreise aus</strong>.",
+                tech_fondue_desc: "<strong>Gemütliche Abende:</strong> Ein Fondue-Set, ein Raclette-Gerät sowie Gesellschaftsspiele stehen Ihnen für wunderbare Abende zur Verfügung.",
                 tech_kitchen_title: "Kaffeemaschine & Ausstattung",
                 tech_coffee_desc: "<strong>Kaffee:</strong> Senseo-Padmaschine + herkömmliche elektrische Filterkaffeemaschine (Filtergröße 4).",
-                tech_fondue_desc: "<strong>Gemütliche Abende:</strong> Ein Fondue-Set, ein Raclette-Gerät sowie Gesellschaftsspiele stehen Ihnen in den Schränken zur Verfügung – für wunderbare Abende.",
                 pmr_title: "Barrierefreiheit & Mobilität",
                 pmr_desc: "Gäste mit eingeschränkter Mobilität sind herzlich willkommen! Bitte beachten Sie jedoch, dass die Wohnung leider nicht rollstuhlgerecht ist (Türbreiten, Badewanne ohne Haltegriffe).",
                 tech_manuals_title: "Bedienungsanleitungen (PDF)",
@@ -1450,7 +1478,7 @@
                 chk_4: "Kühlschrank leer & Spülmaschine ausgeräumt",
                 chk_5: "Fenster & Balkontüren verriegelt",
                 chk_6: "Bettdecken und Kissen im Schrank verstaut",
-                chk_7: "Schlüssel & Badge zurück im Schlüsselsafe (Code verstellt)",
+                chk_7: "Schlüssel & Badge (1 Set) im Schlüsselsafe hinterlassen (Code verstellt) / 1 Set zurück an Agentur (falls gemietet).",
                 review_title: "War Ihr Aufenthalt zauberhaft?",
                 review_desc: "Wenn es Ihnen gefallen hat, freuen wir uns über eine <strong>5-Sterne Bewertung</strong>!",
                 review_issue_l1: "Ein Sauberkeitsproblem, ein Defekt oder etwas vergessen?",
