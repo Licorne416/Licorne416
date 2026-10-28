@@ -154,44 +154,64 @@
                     </p>
                 </div>
 
-                <!-- Contacts Directs -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <!-- Jérôme -->
-                    <div class="glass-card-dark p-6 rounded-3xl text-white shadow-xl flex flex-col justify-between space-y-4">
-                        <div>
-                            <div class="flex items-center justify-between mb-2">
-                                <span class="text-[10px] font-black text-amber-400 uppercase tracking-widest bg-amber-500/10 px-3 py-1 rounded-full border border-amber-400/20" data-i18n="contact_host_tag">Votre Hôte</span>
-                                <span class="text-2xl">🏠</span>
+                <!-- Contacts Directs & Urgences -->
+                <div class="space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <!-- Jérôme -->
+                        <div class="glass-card-dark p-6 rounded-3xl text-white shadow-xl flex flex-col justify-between space-y-4">
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-[10px] font-black text-amber-400 uppercase tracking-widest bg-amber-500/10 px-3 py-1 rounded-full border border-amber-400/20" data-i18n="contact_host_tag">Votre Hôte</span>
+                                    <span class="text-2xl">🏠</span>
+                                </div>
+                                <p class="font-black text-2xl text-white">Jérôme</p>
                             </div>
-                            <p class="font-black text-2xl text-white">Jérôme</p>
+                            <div class="grid grid-cols-2 gap-2">
+                                <a href="tel:+33678539732" class="bg-white/10 hover:bg-white/20 text-white text-center py-3 rounded-2xl text-xs font-bold border border-white/20 transition flex items-center justify-center gap-1.5 shadow-sm">
+                                    📞 <span data-i18n="btn_call">Appeler</span>
+                                </a>
+                                <a href="https://wa.me/33678539732" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white text-center py-3 rounded-2xl text-xs font-bold transition flex items-center justify-center gap-1.5 shadow-md">
+                                    💬 WhatsApp
+                                </a>
+                            </div>
                         </div>
-                        <div class="grid grid-cols-2 gap-2">
-                            <a href="tel:+33678539732" class="bg-white/10 hover:bg-white/20 text-white text-center py-3 rounded-2xl text-xs font-bold border border-white/20 transition flex items-center justify-center gap-1.5 shadow-sm">
-                                📞 <span data-i18n="btn_call">Appeler</span>
-                            </a>
-                            <a href="https://wa.me/33678539732" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white text-center py-3 rounded-2xl text-xs font-bold transition flex items-center justify-center gap-1.5 shadow-md">
-                                💬 WhatsApp
-                            </a>
+
+                        <!-- Marie-France -->
+                        <div class="glass-card p-6 rounded-3xl text-slate-800 shadow-xl flex flex-col justify-between space-y-4">
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-[10px] font-black text-[#c86d2a] uppercase tracking-widest bg-[#c86d2a]/10 px-3 py-1 rounded-full border border-[#c86d2a]/20" data-i18n="contact_concierge_tag">Conciergerie (Linge & Ménage)</span>
+                                    <span class="text-2xl">🔑</span>
+                                </div>
+                                <p class="font-black text-2xl text-[#1b2b48]">Marie-France</p>
+                                <div class="text-xs text-slate-600 mt-2 space-y-1" data-i18n="concierge_desc">
+                                    <p class="font-bold mb-1.5">Prestations optionnelles (commander 15j avant) :</p>
+                                    <p>• Kit draps 1 pers : 25€ | 2 pers : 35€</p>
+                                    <p>• Kit démarrage (16€) : papier toilette, liq. vaisselle, pastilles lave-vaisselle, sopalin, torchon.</p>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2">
+                                <a href="tel:+33695173396" class="bg-[#1b2b48] hover:bg-[#23385d] text-white text-center py-3 rounded-2xl text-xs font-bold transition flex items-center justify-center gap-1.5 shadow-md">
+                                    📞 <span data-i18n="btn_call">Appeler</span>
+                                </a>
+                                <a href="https://wa.me/33695173396" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white text-center py-3 rounded-2xl text-xs font-bold transition flex items-center justify-center gap-1.5 shadow-md">
+                                    💬 WhatsApp
+                                </a>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Marie-France -->
-                    <div class="glass-card p-6 rounded-3xl text-slate-800 shadow-xl flex flex-col justify-between space-y-4">
-                        <div>
-                            <div class="flex items-center justify-between mb-2">
-                                <span class="text-[10px] font-black text-[#c86d2a] uppercase tracking-widest bg-[#c86d2a]/10 px-3 py-1 rounded-full border border-[#c86d2a]/20" data-i18n="contact_concierge_tag">Conciergerie (Linge & Draps)</span>
-                                <span class="text-2xl">🔑</span>
-                            </div>
-                            <p class="font-black text-2xl text-[#1b2b48]">Marie-France</p>
-                            <p class="text-xs text-slate-600 mt-1" data-i18n="concierge_desc">Draps et serviettes : location possible sur demande.</p>
+                    <!-- Urgences Locales -->
+                    <div class="glass-card rounded-3xl p-6 shadow-xl border border-red-500/20 bg-red-50/50">
+                        <div class="flex items-center gap-2 mb-3 border-b border-red-200 pb-2">
+                            <span class="text-lg">🚨</span>
+                            <h4 class="font-black text-sm uppercase text-red-600" data-i18n="contact_urgent_title">Urgences Locales & Médicales</h4>
                         </div>
-                        <div class="grid grid-cols-2 gap-2">
-                            <a href="tel:+33695173396" class="bg-[#1b2b48] hover:bg-[#23385d] text-white text-center py-3 rounded-2xl text-xs font-bold transition flex items-center justify-center gap-1.5 shadow-md">
-                                📞 <span data-i18n="btn_call">Appeler</span>
-                            </a>
-                            <a href="https://wa.me/33695173396" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white text-center py-3 rounded-2xl text-xs font-bold transition flex items-center justify-center gap-1.5 shadow-md">
-                                💬 WhatsApp
-                            </a>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-700">
+                            <p data-i18n="contact_urgent_secours">• <strong>Secours sur Piste :</strong> <a href="tel:0479096705" class="font-bold text-red-600 underline">04 79 09 67 05</a></p>
+                            <p data-i18n="contact_urgent_112">• <strong>Urgence Générale :</strong> <a href="tel:112" class="font-bold text-red-600 underline">112</a></p>
+                            <p data-i18n="contact_urgent_doc">• <strong>Cabinet Médical (Belle Plagne) :</strong> <a href="tel:0479090466" class="font-bold underline">04 79 09 04 66</a></p>
+                            <p data-i18n="contact_urgent_pharma">• <strong>Pharmacie (Plagne Centre) :</strong> <a href="tel:0479090481" class="font-bold underline">04 79 09 04 81</a></p>
                         </div>
                     </div>
                 </div>
